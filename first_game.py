@@ -1,42 +1,24 @@
 import os
 from math import fabs
+from text import welcom, end
+import time
+import sys, tty, termios
 
-def create_main_board(width, height):
 
+def main_stage(board):
+    row = []
     board = []
-    counter = width - 2
-    limit = height -1
-    for row in range(height):
-        board.append([])
-        for column in range(width):
-            board[row].append("#")
-    for digit in range(1, limit):
-        board[digit][1:-1] = ' ' * counter
+    text = open('board.txt').readlines()
+    for line in text:
+        for char in line:
+            row.append(char)
+        board.append(row)
+        row = []
 
-    '''planet1(board)
-    y = 2
-    x = 7
-    counter = int(fabs(y-x))
+    for line in board:
+        line[-1] = line[-1].strip()
 
-    board[4][y:x] = "#" * counter'''
     return board
-
-'''def planet1(board):
-    y = 10
-    x = 13
-    counter = int(fabs(y-x))
-    board[4][y:x] = "#" * counter
-    for x, y in board:
-        print("#")
-        if x > board[1][-1] and y > board[1][-1]:
-            print(".")
-    board[5][9] = "#"
-    board[5][13] = "#"
-    board[6][9] = "#"
-    board[6][13] = "#"
-    board[7][10] = "#"
-    board[7][10] = "#"
-    board[5][11] = "8"'''
 
 
 def print_board(fuel, board):
@@ -46,12 +28,13 @@ def print_board(fuel, board):
     print("Fuel: {}".format(fuel))
 
 
-
 def insert_player(board, x, y):
     board[y][x] = "@"
+    return board
+
 
 def getch():
-    import sys, tty, termios
+
     fd = sys.stdin.fileno()
     old_settings = termios.tcgetattr(fd)
     try:
@@ -65,6 +48,7 @@ def getch():
 def fuel_down(fuel):
 
     fuel -= 2
+    return fuel
 
 
 def move_player(board, x, y):
@@ -83,19 +67,39 @@ def move_player(board, x, y):
     return x, y
 
 
+def welcome():
+
+    os.system('clear')
+    print(welcom)
+    start = input("press S to start the game or Q to quit")
+    if start.lower() == "q":
+        game_end()
+
+
+def game_end():
+
+    os.system('clear')
+    print(end)
+    print("Thanks for playing and see you next time")
+    time.sleep(2)
+    sys.exit()
+
+
 def main():
 
     fuel = 300
     x = 1
     y = 5
+    board = []
 
-    while x != "exit" or fuel > 0:
+    welcome()
+    while x != "exit":
         os.system('clear')
-        board = create_board(80, 20)
-        insert_player(board, x, y)
+        board = main_stage(board)
+        board = insert_player(board, x, y)
         print_board(fuel, board)
         x, y = move_player(board, x, y)
-        fuel_down(fuel)
+
 
 
 
