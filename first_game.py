@@ -4,11 +4,9 @@ import sys, tty, termios
 from text import welcom, end
 from colored import fg, bg, attr
 
-blue = bg('blue') + fg('blue')
-black = bg('black') + fg('black')
+
 grey = bg('grey_19') + fg('grey_19')
 reset = attr('reset')
-wall = grey + "\b#" + reset
 
 def main_stage(board):
     row = []
