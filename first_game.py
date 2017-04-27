@@ -32,6 +32,9 @@ def insert_player(board, x, y):
     board[y][x] = "@"
     return board
 
+def insert_alien(board, x, y):
+    board[y][x] = "O"
+    return board
 
 def getch():
 
@@ -51,20 +54,42 @@ def fuel_down(fuel):
     return fuel
 
 
-def move_player(board, x, y):
+def move_player(board, x, y, x_a, y_a):
 
     pressed_key = getch()
     if pressed_key == 'w' and board[y - 1][x] != '#':
         y -= 1
+        x_a, y_a = move_alien(board, x_a, y_a)
+
     elif pressed_key == 's' and board[y + 1][x] != '#':
         y += 1
+        x_a, y_a = move_alien(board, x_a, y_a)
+
     elif pressed_key == 'a' and board[y][x - 1] != '#':
         x -= 1
+        x_a, y_a = move_alien(board, x_a, y_a)
     elif pressed_key == 'd' and board[y][x + 1] != '#':
         x += 1
-    elif pressed_key == 'x':
-        x = 'exit'
+        x_a, y_a = move_alien(board, x_a, y_a)
+    elif pressed_key == 'x': f = open ("./high_score.txt", 'a')
+    button_pressed = getch()
+
+    return x, y, x_a, y_a
+
+def move_alien(board, x, y):
+    
+    button_pressed = getch()
+    
+    if button_pressed == 'd' and board[y][x - 1] != '#':
+        x += 1
+    elif button_pressed == 'w' and board[y][x + 1] != '#':
+        x -= 1
+    elif button_pressed == 's' and board[y + 1][x] != '#':
+        y -= 1
+    elif button_pressed == 'x' and board[y - 1][x] != '#':
+        y += 1
     return x, y
+
 
 
 def welcome():
@@ -88,6 +113,8 @@ def game_end():
 def main():
 
     fuel = 300
+    x_alien = 5
+    y_alien = 7
     x = 1
     y = 5
     board = []
@@ -96,9 +123,10 @@ def main():
     while x != "exit":
         os.system('clear')
         board = main_stage(board)
+        board = insert_alien(board, x_alien, y_alien)
         board = insert_player(board, x, y)
         print_board(fuel, board)
-        x, y = move_player(board, x, y)
+        x, y, x_alien, y_alien = move_player(board, x, y, x_alien, y_alien)
 
 
 
