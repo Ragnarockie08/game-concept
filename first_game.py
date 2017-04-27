@@ -1,16 +1,23 @@
 import os
-from math import fabs
-from text import welcom, end
 import time
 import sys, tty, termios
+from text import welcom, end
+from colored import fg, bg, attr
 
+blue = bg('blue') + fg('blue')
+black = bg('black') + fg('black')
+grey = bg('grey_19') + fg('grey_19')
+reset = attr('reset')
+wall = grey + "\b#" + reset
 
 def main_stage(board):
     row = []
     board = []
-    text = open('board.txt').readlines()
+    text = open('board.txt', "r").readlines()
     for line in text:
         for char in line:
+            if char == "#":
+                char = grey + char + reset
             row.append(char)
         board.append(row)
         row = []
@@ -88,6 +95,8 @@ def move_alien(board, x, y):
         y -= 1
     elif button_pressed == 'x' and board[y - 1][x] != '#':
         y += 1
+    elif pressed_key == 'x':
+        game_end()
     return x, y
 
 
