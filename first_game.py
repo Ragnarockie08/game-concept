@@ -5,17 +5,20 @@ from text import welcom, end
 from colored import fg, bg, attr
 
 
-grey = bg('grey_19') + fg('grey_19')
+red = fg('red')
 reset = attr('reset')
+file_name = 'board.txt'
+
 
 def main_stage(board):
     row = []
     board = []
-    text = open('board.txt', "r").readlines()
+
+    text = open(file_name, "r").readlines()
     for line in text:
         for char in line:
             if char == "#":
-                char = grey + char + reset
+                char = red + char + reset
             row.append(char)
         board.append(row)
         row = []
@@ -26,14 +29,14 @@ def main_stage(board):
     return board
 
 
-def print_board(fuel, board):
+def print_board(board):
 
     for row in board:
         print("".join(row))
-    print("Fuel: {}".format(fuel))
 
 
-def insert_player(board, x, y):
+def insert_player(fuel, board, x, y):
+
     board[y][x] = "@"
     return board
 
@@ -56,17 +59,16 @@ def getch():
 def fuel_down(fuel):
 
     fuel -= 2
-    return fuel
+    print(fuel)
 
 
-def move_player(board, x, y):
+def move_player(fuel, board, x, y):
 
     pressed_key = getch()
     if pressed_key == 'w' and board[y - 1][x] == ' ':
         y -= 1
     elif pressed_key == 's' and board[y + 1][x] == ' ':
         y += 1
-
     elif pressed_key == 'a' and board[y][x - 1] == ' ':
         x -= 1
     elif pressed_key == 'd' and board[y][x + 1] == ' ':
@@ -74,6 +76,7 @@ def move_player(board, x, y):
     elif pressed_key == 'x':
         x = "exit"
         game_end()
+    print(fuel_down(fuel))
 
     return x, y
 
@@ -103,6 +106,8 @@ def welcome():
         x = "exit"
         game_end()
 
+'''def change_board(board):
+    if '''
 
 def game_end():
 
@@ -115,21 +120,21 @@ def game_end():
 
 def main():
 
-    fuel = 300
-    x_a = 5
-    y_a = 7
     x = 1
     y = 5
+    fuel = 300
     board = []
 
     welcome()
     while x != "exit":
         os.system('clear')
         board = main_stage(board)
-        '''board = insert_alien(board, x_a, y_a)'''
-        board = insert_player(board, x, y)
-        print_board(fuel, board)
-        x, y = move_player(board, x, y)
+        '''if board[x][y] == board[8][36]:
+              file_name == "maze_board.txt"'''
+        board = insert_player(fuel, board, x, y)
+        print_board(board)
+        x, y = move_player(fuel, board, x, y)
+        fuel_down(fuel)
 
 
 if __name__ == "__main__":
