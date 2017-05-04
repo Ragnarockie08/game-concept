@@ -3,14 +3,14 @@ import time
 import sys, tty, termios
 from text import welcom, end
 from colored import fg, bg, attr
+from game_start import choose_spaceship, skip, clear, game_end
 
-
-red = fg('red')
-reset = attr('reset')
-file_name = 'board.txt'
+colors = {'green': bg('green') + fg('green'), 'red': bg('red') + fg('red'), 'blue': fg('blue'), 'black': bg('black') + fg('black'),
+          'reset': attr('reset')}
 
 
 def main_stage(board):
+    file_name = 'stage1.txt'
     row = []
     board = []
 
@@ -18,7 +18,9 @@ def main_stage(board):
     for line in text:
         for char in line:
             if char == "#":
-                char = red + char + reset
+                char = colors['red'] + char + colors['reset']
+            if char.isalpha():
+                char = colors['blue'] + char + colors['reset']
             row.append(char)
         board.append(row)
         row = []
@@ -65,13 +67,13 @@ def fuel_down(fuel):
 def move_player(fuel, board, x, y):
 
     pressed_key = getch()
-    if pressed_key == 'w' and board[y - 1][x] == ' ':
+    if pressed_key == 'w' and board[y - 1][x] == ' ' or board[y - 1][x] == '8':
         y -= 1
-    elif pressed_key == 's' and board[y + 1][x] == ' ':
+    elif pressed_key == 's' and board[y + 1][x] == ' ' or board[y + 1][x] == '8':
         y += 1
-    elif pressed_key == 'a' and board[y][x - 1] == ' ':
+    elif pressed_key == 'a' and board[y][x - 1] == ' ' or board[y][x - 1] == '8':
         x -= 1
-    elif pressed_key == 'd' and board[y][x + 1] == ' ':
+    elif pressed_key == 'd' and board[y][x + 1] == ' ' or board[y][x + 1] == '8':
         x += 1
     elif pressed_key == 'x':
         x = "exit"
@@ -96,26 +98,16 @@ def move_player(fuel, board, x, y):
     return x_a, y_a'''
 
 
-
 def welcome():
 
     os.system('clear')
     print(welcom)
-    start = input("press S to start the game or Q to quit")
-    if start.lower() == "q":
-        x = "exit"
-        game_end()
+    skip()
+    choose_spaceship()
+    skip()
 
 '''def change_board(board):
     if '''
-
-def game_end():
-
-    os.system('clear')
-    print(end)
-    print("Thanks for playing and see you next time")
-    time.sleep(2)
-    sys.exit()
 
 
 def main():
