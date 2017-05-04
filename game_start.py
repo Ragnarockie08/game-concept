@@ -9,7 +9,7 @@ def clear():
 
 
 def skip():
-    skip = input("press S to skip the game or Q to quit")
+    skip = input("press S to move further or Q to quit")
     os.system('clear')
     if skip.lower() == "q":
         x = "exit"
