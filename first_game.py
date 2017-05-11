@@ -8,17 +8,16 @@ from game_start import *
 WALLS = ['#', '''\'''', '/', '|', '-']
 
 class colours:
-    BLUE = '\033[94m'
-    GREEN = '\033[92m'
-    yellow = '\033[93m'
-    FAIL = '\033[91m'
-    BARIER = '\033[0m'
-    BOLD = '\033[1m'
-    UNDERLINE = '\033[4m'
-    red = '\033[31m'
+    Blue = '\033[94m'
+    Green = '\033[92m'
+    Yellow = '\033[93m'
+    Barier = '\033[0m'
+    Bold = '\033[1m'
+    Underline = '\033[4m'
+    Red = '\033[31m'
 
 
-class bg:
+class background:
     black = '\033[40m'
     red = '\033[41m'
     green = '\033[42m'
@@ -52,15 +51,15 @@ def print_board(board):
     for row in board:
         for char in row:
             if char == '#':
-                    print(bg.red + colours.red + char + colours.BARIER, end='')
+                    print(background.red + colours.Red + char + colours.Barier, end='')
             elif char == '@':
-                print(colours.BLUE + char, end='')
+                print(colours.Blue + char, end='')
             elif char.isalpha():
-                print(colours.BLUE + char, end='')
+                print(colours.Blue + char, end='')
             elif char == '8':
-                print(bg.cyan + colours.yellow + char + colours.BARIER, end='')
+                print(background.cyan + colours.Yellow + char + colours.Barier, end='')
             else:
-                print(colours.GREEN + char + colours.BARIER, end='')
+                print(colours.Green + char + colours.Barier, end='')
         print(end='\n')
 
 
@@ -130,7 +129,7 @@ def welcome():
     os.system('clear')
     print(welcom)
     skip()
-    #choose_spaceship()
+    choose_spaceship()
     skip()
 
 '''def change_board(board):

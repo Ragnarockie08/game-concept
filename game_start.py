@@ -3,6 +3,7 @@ import os
 from text import end
 import time
 import sys
+import csv
 
 def clear():
     os.system('clear')
