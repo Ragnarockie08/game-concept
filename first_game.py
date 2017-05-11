@@ -3,10 +3,30 @@ import time
 import sys, tty, termios
 from text import welcom, end
 from colored import fg, bg, attr
-from game_start import choose_spaceship, skip, clear, game_end
+from game_start import *
 
-colors = {'green': bg('green') + fg('green'), 'red': bg('red') + fg('red'), 'blue': fg('blue'), 'black': bg('black') + fg('black'),
-          'reset': attr('reset')}
+WALLS = ['#', '''\'''', '/', '|', '-']
+
+class colours:
+    BLUE = '\033[94m'
+    GREEN = '\033[92m'
+    yellow = '\033[93m'
+    FAIL = '\033[91m'
+    BARIER = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+    red = '\033[31m'
+
+
+class bg:
+    black = '\033[40m'
+    red = '\033[41m'
+    green = '\033[42m'
+    orange = '\033[43m'
+    blue = '\033[44m'
+    purple = '\033[45m'
+    cyan = '\033[46m'
+    lightgrey = '\033[47m'
 
 
 def main_stage(board):
@@ -17,10 +37,6 @@ def main_stage(board):
     text = open(file_name, "r").readlines()
     for line in text:
         for char in line:
-            if char == "#":
-                char = colors['red'] + char + colors['reset']
-            if char.isalpha():
-                char = colors['blue'] + char + colors['reset']
             row.append(char)
         board.append(row)
         row = []
@@ -34,7 +50,18 @@ def main_stage(board):
 def print_board(board):
 
     for row in board:
-        print("".join(row))
+        for char in row:
+            if char == '#':
+                    print(bg.red + colours.red + char + colours.BARIER, end='')
+            elif char == '@':
+                print(colours.BLUE + char, end='')
+            elif char.isalpha():
+                print(colours.BLUE + char, end='')
+            elif char == '8':
+                print(bg.cyan + colours.yellow + char + colours.BARIER, end='')
+            else:
+                print(colours.GREEN + char + colours.BARIER, end='')
+        print(end='\n')
 
 
 def insert_player(fuel, board, x, y):
@@ -67,13 +94,13 @@ def fuel_down(fuel):
 def move_player(fuel, board, x, y):
 
     pressed_key = getch()
-    if pressed_key == 'w' and board[y - 1][x] == ' ' or board[y - 1][x] == '8':
+    if pressed_key == 'w' and board[y - 1][x] not in WALLS:
         y -= 1
-    elif pressed_key == 's' and board[y + 1][x] == ' ' or board[y + 1][x] == '8':
+    elif pressed_key == 's' and board[y + 1][x] not in WALLS:
         y += 1
-    elif pressed_key == 'a' and board[y][x - 1] == ' ' or board[y][x - 1] == '8':
+    elif pressed_key == 'a' and board[y][x - 1] not in WALLS:
         x -= 1
-    elif pressed_key == 'd' and board[y][x + 1] == ' ' or board[y][x + 1] == '8':
+    elif pressed_key == 'd' and board[y][x + 1] not in WALLS:
         x += 1
     elif pressed_key == 'x':
         x = "exit"
@@ -103,7 +130,7 @@ def welcome():
     os.system('clear')
     print(welcom)
     skip()
-    choose_spaceship()
+    #choose_spaceship()
     skip()
 
 '''def change_board(board):

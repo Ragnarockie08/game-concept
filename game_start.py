@@ -44,10 +44,10 @@ def choose_spaceship():
             except ValueError:
                 clear()
                 continue
-                if choose in spaceships.keys():
-                    print(spaceships[choose])
-                    skip()
-                    continue
+            if choose in spaceships.keys():
+                print(spaceships[choose])
+                skip()
+                continue
         elif options == 2:
             ship_take = input("Choose your spaceship: ").upper()
 
