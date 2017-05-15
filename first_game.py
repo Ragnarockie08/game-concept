@@ -1,9 +1,9 @@
 import os
 import time
 import sys, tty, termios
-from text import welcom, end
-from colored import fg, bg, attr
+from text import *
 from game_start import *
+from game_inventory import *
 
 WALLS = ['#', '''\'''', '/', '|', '-']
 
@@ -39,7 +39,6 @@ def main_stage(board):
             row.append(char)
         board.append(row)
         row = []
-
     for line in board:
         line[-1] = line[-1].strip()
 
@@ -61,6 +60,7 @@ def print_board(board):
             else:
                 print(colours.Green + char + colours.Barier, end='')
         print(end='\n')
+    print(print_table(inventory))
 
 
 def insert_player(fuel, board, x, y):
@@ -68,9 +68,6 @@ def insert_player(fuel, board, x, y):
     board[y][x] = "@"
     return board
 
-'''def insert_alien(board, x, y):
-    board[y][x] = "O"
-    return board'''
 
 def getch():
 
@@ -109,21 +106,6 @@ def move_player(fuel, board, x, y):
     return x, y
 
 
-'''def move_alien(board, x_a, y_a):
-
-    pressed_key = getch()
-    if pressed_key == 'd' and board[y_a][x_a - 1] == ' ':
-        x_a += 1
-    elif pressed_key == 'w' and board[y_a][x_a + 1] == ' ':
-        x_a -= 1
-    elif pressed_key == 's' and board[y_a + 1][x_a] == ' ':
-        y_a -= 1
-    elif pressed_key == 'x' and board[y_a - 1][x_a] == ' ':
-        y_a += 1
-
-    return x_a, y_a'''
-
-
 def welcome():
 
     os.system('clear')
@@ -132,13 +114,10 @@ def welcome():
     choose_spaceship()
     skip()
 
-'''def change_board(board):
-    if '''
-
 
 def main():
 
-    x = 1
+    x = 5
     y = 5
     fuel = 300
     board = []

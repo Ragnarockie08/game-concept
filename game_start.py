@@ -26,21 +26,23 @@ def game_end():
 
 
 def choose_spaceship():
-    spaceships = {"NORMANDIA": "NORMANDIA IS FAST BUT WASTE MORE FUEL THEN THE OTHERS",
-                  "HETMAN": "HETMAN IS SLOW BUT HAVE HUGE HOLD AND ARMOR",
-                  "PROTECTOR": "IS THE BEST IN THE BATTLEFIELD"
+    spaceships = {"1.NORMANDIA": "NORMANDIA IS FAST BUT WASTE MORE FUEL THEN THE OTHERS",
+                  "2.PROTECTOR": "IS THE BEST IN THE BATTLEFIELD"
                   }
     while True:
         print(ship)
-        for key in spaceships:
-            print(key)
+        print("1.NORMANDIA")
+        print("2.PROTECTOR")
+        print("="* 30)
+
         try:
-            options = int(input("Press 1 to get hints about ships or 2 to choose your ship for whole game"))
+            options = int(input("1: Hints about ships \n2: Choose your ship"))
         except ValueError:
             clear()
             continue
         if options == 1:
             try:
+                print("="*30)
                 choose = input("Choose spaceship to see what abilities it has: ").upper()
             except ValueError:
                 clear()
@@ -50,22 +52,17 @@ def choose_spaceship():
                 skip()
                 continue
         elif options == 2:
-            ship_take = input("Choose your spaceship: ").upper()
+            print("="*30)
+            ship_take = input("Choose your spaceship: (press 1 or 2)").upper()
 
-            if ship_take == "NORMANDIA":
-                fuel = 300
+            if ship_take == "1":
+                fuel = 500
                 attack = 3
                 speed = 3
                 armor = 7
                 break
-            elif ship_take == "HETMAN":
+            elif ship_take == "2":
                 fuel = 500
-                attack = 3
-                speed = 1
-                armor = 10
-                break
-            elif ship_take == "PROTECTOR":
-                fuel = 300
                 attack = 5
                 speed = 2
                 armor = 5
@@ -77,10 +74,10 @@ def choose_spaceship():
             clear()
             continue
     print("="*180)
-    print('''  Your Ship: {}
+    print('''
              Fuel: {}
              attack: {}
              speed: {}
              armor: {}'''
-             .format(ship_take, fuel, attack, speed, armor))
+             .format(fuel, attack, speed, armor))
     print("="*180)
