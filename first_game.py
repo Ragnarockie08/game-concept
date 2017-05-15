@@ -108,6 +108,7 @@ def move_player(fuel, board, x, y):
 
 def welcome():
 
+    print_menu()
     os.system('clear')
     print(welcom)
     skip()

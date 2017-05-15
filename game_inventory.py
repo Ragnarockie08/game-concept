@@ -5,15 +5,6 @@ from game_start import *
 inventory = {'Platyna': 0, 'Pallad': 0, 'Iryd': 0, 'Weapons': 1, 'fuel': 500}
 loot = ['Platyna', 'Pallad', 'Iryd', 'Fuel']
 
-
-def display_inventory(inventory):
-    '''Function that prints invetory'''
-    print("\nYour inventory:\n")
-    for key, value in inventory.items():
-        print(key, value)
-    print("Total number of items: {}\n".format(sum(inventory.values())))
-
-
 def add_to_inventory(inventory, added_items):
     '''Function that add items form diffrent loots'''
 
@@ -69,13 +60,3 @@ def export_inventory(inventory, filename="export_inventory.csv"):
                 list_items.append(key)
         list_items = ",".join(list_items)
         outfile.write(list_items)
-
-
-
-
-'''display_inventory(inventory)
-player_items = add_to_inventory(inventory, enemy_loot)
-print_table(player_items, "count,desc")
-player_items = import_inventory(inventory, filename="import_inventory.csv")
-print_table(player_items, "count,asc")
-export_inventory(player_items, filename="export_inventory.csv")'''

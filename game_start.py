@@ -4,6 +4,7 @@ from text import end
 import time
 import sys
 import csv
+from first_game import getch
 
 def clear():
     os.system('clear')
@@ -23,6 +24,32 @@ def game_end():
     print("Thanks for playing and see you next time")
     time.sleep(2)
     sys.exit()
+
+
+def print_menu():
+    actual_menu = None
+    with open('main_manu.txt', 'r') as f:
+        f = f.readlines()
+        os.system('clear')
+        for i in range(len(f)):
+            print(f[i], end='')
+
+        key_pressed = getch()
+
+        if key_pressed == 'i':
+            os.system('clear')
+            actual_menu = 'menu.txt'
+            skip()
+        elif key_pressed == 'p':
+            os.system('clear')
+            actual_menu = 'plot.txt'
+            skip()
+        elif key_pressed == 'm':
+            os.system('clear')
+            actual_menu = 'main_manu.txt'
+            skip()
+        elif key_pressed == 'x':
+            sys.exit()
 
 
 def choose_spaceship():
