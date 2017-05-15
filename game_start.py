@@ -1,10 +1,11 @@
 from speceship import *
 import os
-from text import end
+from text import *
 import time
 import sys
 import csv
 from first_game import getch
+
 
 def clear():
     os.system('clear')
@@ -17,6 +18,15 @@ def skip():
         x = "exit"
         game_end()
 
+def welcome():
+
+    os.system('clear')
+    print(welcom)
+    skip()
+    choose_spaceship()
+    skip()
+
+
 def game_end():
 
     os.system('clear')
@@ -26,35 +36,9 @@ def game_end():
     sys.exit()
 
 
-def print_menu():
-    actual_menu = None
-    with open('main_manu.txt', 'r') as f:
-        f = f.readlines()
-        os.system('clear')
-        for i in range(len(f)):
-            print(f[i], end='')
-
-        key_pressed = getch()
-
-        if key_pressed == 'i':
-            os.system('clear')
-            actual_menu = 'menu.txt'
-            skip()
-        elif key_pressed == 'p':
-            os.system('clear')
-            actual_menu = 'plot.txt'
-            skip()
-        elif key_pressed == 'm':
-            os.system('clear')
-            actual_menu = 'main_manu.txt'
-            skip()
-        elif key_pressed == 'x':
-            sys.exit()
-
-
 def choose_spaceship():
-    spaceships = {"1.NORMANDIA": "NORMANDIA IS FAST BUT WASTE MORE FUEL THEN THE OTHERS",
-                  "2.PROTECTOR": "IS THE BEST IN THE BATTLEFIELD"
+    spaceships = {"NORMANDIA": "NORMANDIA IS FAST BUT WASTE MORE FUEL THEN THE OTHERS",
+                  "PROTECTOR": "IS THE BEST IN THE BATTLEFIELD"
                   }
     while True:
         print(ship)

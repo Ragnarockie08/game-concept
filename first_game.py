@@ -4,6 +4,8 @@ import sys, tty, termios
 from text import *
 from game_start import *
 from game_inventory import *
+from game_menu import *
+
 
 WALLS = ['#', '''\'''', '/', '|', '-']
 
@@ -63,7 +65,7 @@ def print_board(board):
     print(print_table(inventory))
 
 
-def insert_player(fuel, board, x, y):
+def insert_player(board, x, y):
 
     board[y][x] = "@"
     return board
@@ -81,13 +83,7 @@ def getch():
     return ch
 
 
-def fuel_down(fuel):
-
-    fuel -= 2
-    print(fuel)
-
-
-def move_player(fuel, board, x, y):
+def move_player(board, x, y):
 
     pressed_key = getch()
     if pressed_key == 'w' and board[y - 1][x] not in WALLS:
@@ -101,38 +97,23 @@ def move_player(fuel, board, x, y):
     elif pressed_key == 'x':
         x = "exit"
         game_end()
-    print(fuel_down(fuel))
-
     return x, y
-
-
-def welcome():
-
-    print_menu()
-    os.system('clear')
-    print(welcom)
-    skip()
-    choose_spaceship()
-    skip()
 
 
 def main():
 
     x = 5
     y = 5
-    fuel = 300
     board = []
 
+    print_menu()
     welcome()
-    while x != "exit":
+    while x != "exit" or fuel > 0:
         os.system('clear')
         board = main_stage(board)
-        '''if board[x][y] == board[8][36]:
-              file_name == "maze_board.txt"'''
-        board = insert_player(fuel, board, x, y)
+        board = insert_player(board, x, y)
         print_board(board)
-        x, y = move_player(fuel, board, x, y)
-        fuel_down(fuel)
+        x, y = move_player(board, x, y)
 
 
 if __name__ == "__main__":
