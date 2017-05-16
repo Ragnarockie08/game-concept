@@ -52,10 +52,10 @@ def print_board(board):
                     print(background.red + colours.Red + char + colours.Barier, end='')
             elif char == '@':
                 print(colours.Blue + char, end='')
-            elif char == 'K':
-                print(colours.Purple + '⛰️', end='')
             elif char == '8':
                 print(background.cyan + colours.Yellow + char + colours.Barier, end='')
+            elif char == '*':
+                print(colours.Purple + '⛰️', end='')
             else:
                 print(colours.Green + char + colours.Barier, end='')
         print(end='\n')
@@ -92,6 +92,7 @@ def collect_elements(board, x, y, inventory):
 
     if board[y][x] == '*':
         inventory['Platyna'] += 10
+
     elif board[y][x] == '&':
         inventory['Pallad'] += 10
     elif board[y][x] == '+':
@@ -121,27 +122,29 @@ def main():
     x = 5
     y = 5
     board = []
+    level = 1
 
     #print_menu()
     #welcome()
     start_time = time.time()
-    board = create_board(board, 'stage1.txt')
     while x != 'exit':
+        if level == 1:
+            board = create_board(board, 'stage1.txt')
         collect_elements(board, x, y, inventory)
         if inventory['fuel'] < 1:
-            break
-            game_end()
-        if board[y][x] == '8':
-            x = 1
-            y = 1
+             break
+             game_end()
+        elif board[y][x] == '8' or level == 2:
+            level = 2
             board = create_board(board, 'maze_board.txt')
-        elif board[y][x] == '9':
-            x = 1
-            y = 1
+        elif board[y][x] == '9' or level == 3:
+            level = 3
+            board = create_board(board, 'maze_board2.txt')
+        elif board[y][x] == '7' or level == 4:
+            level = 4
             board = create_board(board, 'maze_board2.txt')
         elif board[y][x] == '0':
-            x = 1
-            y = 1
+            level = 1
             board = create_board(board, 'stage1.txt')
         os.system('clear')
         board = insert_player(board, x, y)
