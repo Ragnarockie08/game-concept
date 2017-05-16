@@ -1,5 +1,5 @@
 import os
-import time
+from time import time, strftime
 import sys, tty, termios
 from text import *
 from game_start import *
@@ -17,6 +17,7 @@ class colours:
     Bold = '\033[1m'
     Underline = '\033[4m'
     Red = '\033[31m'
+    Purple = '\033[45m'
 
 
 class background:
@@ -30,21 +31,17 @@ class background:
     lightgrey = '\033[47m'
 
 
-def main_stage(board):
-    file_name = 'stage1.txt'
-    row = []
-    board = []
+def create_board(board, filename='stage1.txt'):
 
-    text = open(file_name, "r").readlines()
-    for line in text:
-        for char in line:
-            row.append(char)
-        board.append(row)
-        row = []
-    for line in board:
-        line[-1] = line[-1].strip()
+    with open(filename, 'r') as f:
+        content = f.readlines()
+        content = [x.strip() for x in content]
+        board = []
+        char = ''
+        for line in content:
+            board.append(list(line))
+        return board
 
-    return board
 
 
 def print_board(board):
@@ -55,8 +52,8 @@ def print_board(board):
                     print(background.red + colours.Red + char + colours.Barier, end='')
             elif char == '@':
                 print(colours.Blue + char, end='')
-            elif char.isalpha():
-                print(colours.Blue + char, end='')
+            elif char == 'K':
+                print(colours.Purple + '⛰️', end='')
             elif char == '8':
                 print(background.cyan + colours.Yellow + char + colours.Barier, end='')
             else:
@@ -65,11 +62,11 @@ def print_board(board):
     print(print_table(inventory))
 
 
+
 def insert_player(board, x, y):
 
     board[y][x] = "@"
     return board
-
 
 def getch():
 
@@ -81,6 +78,26 @@ def getch():
     finally:
         termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
     return ch
+
+
+def highscore(start_time, end_time):
+    username = input("Enter yout username!")
+    time = str(int(end_time) - int(start_time))
+    date = strftime("%d.%m.%Y %H:%M")
+
+    highscore = username + date + time
+    return highscore
+
+def collect_elements(board, x, y, inventory):
+
+    if board[y][x] == '*':
+        inventory['Platyna'] += 10
+    elif board[y][x] == '&':
+        inventory['Pallad'] += 10
+    elif board[y][x] == '+':
+        inventory['Iryd'] += 10
+    elif board[y][x] == '%':
+        inventory['fuel'] += 50
 
 
 def move_player(board, x, y):
@@ -99,21 +116,42 @@ def move_player(board, x, y):
         game_end()
     return x, y
 
-
 def main():
 
     x = 5
     y = 5
     board = []
 
-    print_menu()
-    welcome()
-    while x != "exit" or fuel > 0:
+    #print_menu()
+    #welcome()
+    start_time = time.time()
+    board = create_board(board, 'stage1.txt')
+    while x != 'exit':
+        collect_elements(board, x, y, inventory)
+        if inventory['fuel'] < 1:
+            break
+            game_end()
+        if board[y][x] == '8':
+            x = 1
+            y = 1
+            board = create_board(board, 'maze_board.txt')
+        elif board[y][x] == '9':
+            x = 1
+            y = 1
+            board = create_board(board, 'maze_board2.txt')
+        elif board[y][x] == '0':
+            x = 1
+            y = 1
+            board = create_board(board, 'stage1.txt')
         os.system('clear')
-        board = main_stage(board)
         board = insert_player(board, x, y)
         print_board(board)
         x, y = move_player(board, x, y)
+    end_time = time.time()
+    export_to_csv = highscore(start_time, end_time)
+    save_highscore(export_to_csv)
+    highscore_table = read_highscore()
+    print_highscore(highscore_table)
 
 
 if __name__ == "__main__":

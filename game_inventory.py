@@ -2,7 +2,7 @@ import csv
 from game_start import *
 
 
-inventory = {'Platyna': 0, 'Pallad': 0, 'Iryd': 0, 'Weapons': 1, 'fuel': 500}
+inventory = {'Platyna': 0, 'Pallad': 0, 'Iryd': 0, 'Weapons': 1, 'fuel': 200}
 loot = ['Platyna', 'Pallad', 'Iryd', 'Fuel']
 
 def add_to_inventory(inventory, added_items):
