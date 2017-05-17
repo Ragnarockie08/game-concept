@@ -1,0 +1,37 @@
+Argentina | Buenos Aires
+Austria | Vienna
+Belarus | Minsk
+Belgium | Brussels
+Bosnia and Herzegovina | Sarajevo
+Bulgaria | Sofia
+Croatia | Zagreb
+Czech Republic | Prague
+Denmark | Copenhagen
+Estonia | Tallinn
+Finland | Helsinki
+France | Paris
+Germany | Berlin
+Greece | Athens
+Hungary | Budapest
+Italy | Rome
+Japan | Tokyo
+Latvia | Riga
+Lithuania | Vilnius
+Malta | Valletta
+Monaco | Monaco
+Netherlands | Amsterdam
+Poland | Warsaw
+Portugal | Lisbon
+Romania | Bucharest
+Russia | Moscow
+San Marino | San Marino
+Serbia | Belgrade
+Slovakia | Bratislava
+Slovenia | Ljubljana
+Spain | Madrid
+Sweden | Stockholm
+Switzerland | Bern
+Turkey | Ankara
+Ukraine | Kyiv
+United Kingdom | London
+United States of America | Washington
