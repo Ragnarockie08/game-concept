@@ -20,9 +20,6 @@ def show_highscore():
 def add_highscore(time):
     username = input("Enter yout username!")
     now = datetime.datetime.now()
-    #
-    # with open('highscore.csv', 'a') as csv_file:
-    #     wiriter = csv.writer(csv_file)
 
     file_csv = open('highscore.csv', "a")
     file_csv.write(username + " | " + str(now) + " | " + str(time) + "  | " +'\n')

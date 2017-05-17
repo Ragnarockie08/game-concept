@@ -118,7 +118,6 @@ def move_player(board, x, y):
         x += 1
     elif pressed_key == 'x':
         x = "exit"
-        game_end()
     return x, y
 
 def main():
@@ -132,15 +131,21 @@ def main():
     print_menu()
     welcome_screen()
     start_time = time.time()
+
     while x != 'exit':
         if level == 1:
             board = create_board(board, 'stage1.txt')
         collect_elements(board, x, y, inventory)
         if inventory['fuel'] < 1:
+<<<<<<< Updated upstream
             end_time = time.time()
             time_game = end_time - start_time
             game_end(time_game)
         elif board[y][x] == '8' or level == 2:
+=======
+            break
+        elif board[y][x] == '8':
+>>>>>>> Stashed changes
             level = 2
             board = create_board(board, 'maze_board.txt')
         elif board[y][x] == '9' or level == 3:
@@ -165,7 +170,8 @@ def main():
         print_board(board)
         x, y = move_player(board, x, y)
     end_time = time.time()
-    print(highscore(start_time, end_time))
+    time_game = end_time - start_time
+    add_highscore(time_game)
 
 
 if __name__ == "__main__":

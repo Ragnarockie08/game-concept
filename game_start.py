@@ -18,19 +18,11 @@ def welcome_screen():
     skip()
 
 
-def game_end(time_game):
+def game_end():
 
     os.system('clear')
-    # highscore(end_time)
-    print(time_game)
-    print(end)
+
     print("Thanks for playing and see you next time")
 
-    add_highscore(time_game)
-
-    # show_highscore = input("Press (h) to shows highscore"))
-    # #
-    # # if show_highscore == 'h':
-    # #     highscore()
     time.sleep(2)
     sys.exit()
