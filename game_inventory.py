@@ -1,6 +1,7 @@
 import os
 import csv
 from game_start import *
+from game_menu import getch
 
 inventory = {'Platyna': 0, 'Pallad': 0, 'Iryd': 0, 'Weapons': 0, 'fuel': 0, 'Armor': 0}
 
@@ -36,7 +37,7 @@ def choose_spaceship():
             ship_take = input("Choose your spaceship: (press 1 or 2)").upper()
 
             if ship_take == "1":
-                inventory['fuel'] = 50
+                inventory['fuel'] = 500
                 inventory['armor'] = 7
                 break
             elif ship_take == "2":
@@ -58,7 +59,8 @@ def choose_spaceship():
 
 
 def skip():
-    skip = input("press S to move further or Q to quit")
+    print("press S to move further or Q to quit")
+    skip = getch()
     os.system('clear')
     if skip.lower() == "q":
         x = "exit"

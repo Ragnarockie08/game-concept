@@ -1,6 +1,5 @@
 import os
 from time import time, strftime
-import sys, tty, termios
 from text import *
 from game_start import *
 from game_inventory import *
@@ -48,22 +47,20 @@ def create_board(board, filename='stage1.txt'):
 
 def print_board(board):
 
+    monster = ['<', '>', ',', '.', "'"]
+
     for row in board:
         for char in row:
             if char == '#':
-                print(background.red + colours.Red + char + colours.Barier, end='')
+                    print(background.red + colours.Red + char + colours.Barier, end='')
             elif char == '@':
                 print(colours.Blue + char, end='')
             elif char == '8':
                 print(background.cyan + colours.Yellow + char + colours.Barier, end='')
-            elif char == '7':
-                print(background.blue + colours.Blue + char + colours.Barier, end='')
-            elif char == '9':
-                print(background.blue + colours.Blue + char + colours.Barier, end='')
-            elif char == '$':
-                print('')
             elif char == '*':
-                print(colours.Purple + '⛰️', end='')
+                print(colours.Purple + '⛰️' + colours.Barier, end='')
+            elif char in monster:
+                print(colours.Red + char + colours.Barier, end='')
             elif char == 'P':
                 print(background.blue + colours.Blue + char + colours.Barier, end='')
             else:
@@ -78,20 +75,7 @@ def insert_player(board, x, y):
     return board
 
 
-def getch():
-
-    fd = sys.stdin.fileno()
-    old_settings = termios.tcgetattr(fd)
-    try:
-        tty.setraw(sys.stdin.fileno())
-        ch = sys.stdin.read(1)
-    finally:
-        termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
-    return ch
-
-
 def collect_elements(board, x, y, inventory):
-
 
     if inventory['Weapons'] == 0:
         if board[y][x] == '*':
@@ -100,7 +84,7 @@ def collect_elements(board, x, y, inventory):
             inventory['Pallad'] += 10
         elif board[y][x] == '+':
             inventory['Iryd'] += 10
-    elif board[y][x] == '%':
+    if board[y][x] == '%':
         inventory['fuel'] += 50
     suma = [inventory['Platyna'], inventory['Pallad'], inventory['Iryd']]
     if sum(suma) == 300:
@@ -136,19 +120,11 @@ def main():
     print_menu()
     welcome_screen()
     start_time = time.time()
-
     while x != 'exit':
         if level == 1:
             board = create_board(board, 'stage1.txt')
         collect_elements(board, x, y, inventory)
         if inventory['fuel'] < 1:
-            end_time = time.time()
-            time_game = end_time - start_time
-            game_end(time_game)
-        elif board[y][x] == '8' or level == 2:
-            break
-        elif board[y][x] == '8':
-            game_end()
             break
         elif board[y][x] == '7' or level == 2:
             level = 2
@@ -163,19 +139,15 @@ def main():
                     hot_cold()
                     boss_fight = 'off'
                 board = create_board(board, 'boss_map.txt')
-        elif board[y][x] == '0':
+        if board[y][x] == '0':
+            guess_digit()
             level = 1
-            board = create_board(board, 'stage1.txt')
-        elif board[y][x] == '1':
+        if board[y][x] == '1':
             level = 1
-            board = create_board(board, 'stage1.txt')
         os.system('clear')
         board = insert_player(board, x, y)
         print_board(board)
         x, y = move_player(board, x, y)
-    end_time = time.time()
-    time_game = end_time - start_time
-    add_highscore(time_game)
     game_end()
 
 

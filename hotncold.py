@@ -1,4 +1,5 @@
 import random
+import sys
 
 
 
@@ -53,4 +54,5 @@ def hot_cold():
 
             tries += 1
         print('You got it!')
+        
         break

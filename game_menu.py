@@ -1,6 +1,7 @@
 import os
 import sys
 from text import welcom
+import sys, tty, termios
 
 def print_menu():
     while True:
@@ -17,17 +18,30 @@ def print_menu():
         if choice == "s":
             break
 
+
+def getch():
+
+    fd = sys.stdin.fileno()
+    old_settings = termios.tcgetattr(fd)
+    try:
+        tty.setraw(sys.stdin.fileno())
+        ch = sys.stdin.read(1)
+    finally:
+        termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
+    return ch
+
+
 def print_choices():
 
-    choice = input().lower()
+    choice = getch()
     if choice == 'p':
         os.system('clear')
         show_plot()
-        input("Press key to continue")
+        input("Press Enter to continue")
     elif choice == 'i':
         os.system('clear')
         print_info()
-        input("Press key to continue")
+        input("Press Enter to continue")
     elif choice == 'x':
         print("Thanks for playing!")
         sys.exit()
@@ -63,6 +77,11 @@ def print_info():
                                                                                     S - move down
                                                                                     A - move left
                                                                                     D - move right
+                                                                                 Elements to collect:
+                                                                                    ⛰️ - Platyna
+                                                                                    + - Iryd
+                                                                                    & - Pallad
+                                                                                    % - Fuel
                                                                            ----------------------------------
                                                                             TO COLLECT ELEMENTS MOVE ON THEM
                                                                                     X - quit the game
