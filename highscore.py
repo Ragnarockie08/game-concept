@@ -1,5 +1,6 @@
 import datetime
 import csv
+from first_game import *
 
 def show_highscore():
     with open('highscore.csv', encoding='utf-8-sig') as csvfile:
@@ -22,32 +23,26 @@ def show_highscore():
                     longest_name = lenght_name
             count += 1
 
-        sorted_desc = sorted(score, key=lambda x: x[2]) #Sorts desc
-        print(longest_name)
-        space = (" " * 10)
-
+        sorted_desc = sorted(score, key=lambda x: x[2])
 
         print("HIGHSCORE")
-        print("name".rjust(longest_name), "date".rjust(6), "time".rjust(6))
-        print("-" * (longest_name + 15))
+        print("name".rjust(longest_name), "date".rjust(15), "time".rjust(6))
+        print("-" * (longest_name + 30))
         for item in sorted_desc:
-            print(item[0].rjust(longest_name), item[1], space,  item[2])
-            # print(" ".join(item[0], str(item[1]), str(item[2])))
-            # print(" ".join(item))
-        print("-" * (longest_name + 15))
-
+            print("".join((item[0].rjust(longest_name), item[1][:10].rjust(15), item[2][:4].rjust(6), " sec")))
+        print("-" * (longest_name + 30))
 
 #
-#
-# def add_highscore(time):
-#     username = input("Enter your username: ")
-#     now = datetime.datetime.now()
-#
-#     file_csv = open('highscore.csv', "a")
-#     file_csv.write(username + "|" + str(now) + "|" + str(time) + "|" +'\n')
-#     file_csv.close()
-#     show_highscore()
 
+def add_highscore(time):
+    username = input("Enter your username: ")
+    now = datetime.datetime.now()
 
+    file_csv = open('highscore.csv', "a")
+    file_csv.write(username + "|" + str(now) + "|" + str(time) + "|" +'\n')
+    file_csv.close()
+    show_highscore()
+
+#
 
 show_highscore()
