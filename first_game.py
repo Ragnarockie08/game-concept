@@ -6,6 +6,7 @@ from game_start import *
 from game_inventory import *
 from game_menu import *
 from hotncold import *
+from riddles import *
 
 
 WALLS = ['#', '''\'''', '/', '|', '-']
@@ -50,11 +51,15 @@ def print_board(board):
     for row in board:
         for char in row:
             if char == '#':
-                    print(background.red + colours.Red + char + colours.Barier, end='')
+                print(background.red + colours.Red + char + colours.Barier, end='')
             elif char == '@':
                 print(colours.Blue + char, end='')
             elif char == '8':
                 print(background.cyan + colours.Yellow + char + colours.Barier, end='')
+            elif char == '7':
+                print(background.blue + colours.Blue + char + colours.Barier, end='')
+            elif char == '9':
+                print(background.blue + colours.Blue + char + colours.Barier, end='')
             elif char == '$':
                 print('')
             elif char == '*':
@@ -100,9 +105,9 @@ def collect_elements(board, x, y, inventory):
     suma = [inventory['Platyna'], inventory['Pallad'], inventory['Iryd']]
     if sum(suma) == 300:
         inventory['Weapons'] = 1
-        inventory['Platyna'] -= sum(suma)/3
-        inventory['Pallad'] -= sum(suma)/3
-        inventory['Iryd'] -= sum(suma)/3
+        inventory['Platyna'] = 0
+        inventory['Pallad'] = 0
+        inventory['Iryd'] = 0
 
 
 def move_player(board, x, y):
@@ -137,21 +142,21 @@ def main():
             board = create_board(board, 'stage1.txt')
         collect_elements(board, x, y, inventory)
         if inventory['fuel'] < 1:
-<<<<<<< Updated upstream
             end_time = time.time()
             time_game = end_time - start_time
             game_end(time_game)
         elif board[y][x] == '8' or level == 2:
-=======
             break
         elif board[y][x] == '8':
->>>>>>> Stashed changes
+            game_end()
+            break
+        elif board[y][x] == '7' or level == 2:
             level = 2
             board = create_board(board, 'maze_board.txt')
         elif board[y][x] == '9' or level == 3:
             level = 3
             board = create_board(board, 'maze_board2.txt')
-        elif board[y][x] == '7' or level == 4:
+        elif board[y][x] == '8' or level == 4:
             if inventory['Weapons'] == 1:
                 level = 4
                 if boss_fight == 'on' and board[y][x] == 'P':
@@ -159,7 +164,6 @@ def main():
                     boss_fight = 'off'
                 board = create_board(board, 'boss_map.txt')
         elif board[y][x] == '0':
-            
             level = 1
             board = create_board(board, 'stage1.txt')
         elif board[y][x] == '1':
@@ -172,6 +176,7 @@ def main():
     end_time = time.time()
     time_game = end_time - start_time
     add_highscore(time_game)
+    game_end()
 
 
 if __name__ == "__main__":

@@ -23,9 +23,9 @@ def guess_digit():
 
 
 
-def test_milk_galaxy:
-    
+'''def test_milk_galaxy:
+
 
 
 # guess_digit()
-test_milk_galaxy()
+test_milk_galaxy()'''
