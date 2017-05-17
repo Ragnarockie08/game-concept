@@ -3,11 +3,11 @@ import csv
 from game_start import *
 from game_menu import getch
 
-inventory = {'Platyna': 0, 'Pallad': 0, 'Iryd': 0, 'Weapons': 0, 'fuel': 0, 'Armor': 0}
+inventory = {'Platinum': 0, 'Palladium': 0, 'Iridium': 0, 'Weapons': 0, 'fuel': 300, 'Armor': 5}
 
 def choose_spaceship():
-    spaceships = {"NORMANDIA": "NORMANDIA IS FAST BUT WASTE MORE FUEL THEN THE OTHERS",
-                  "PROTECTOR": "IS THE BEST IN THE BATTLEFIELD"
+    spaceships = {"NORMANDIA": "NORMANDIA HAVE HUGE TANK",
+                  "PROTECTOR": "PROTECTOR HAVE UNBROKEN ARMOR"
                   }
 
     while True:
@@ -21,48 +21,40 @@ def choose_spaceship():
         except ValueError:
             os.system('clear')
             continue
+
         if options == 1:
-            try:
-                print("="*30)
-                choose = input("Choose spaceship to see what abilities it has: ").upper()
-            except ValueError:
-                os.system('clear')
-                continue
-            if choose in spaceships.keys():
-                print(spaceships[choose])
-                skip()
-                continue
+            print(spaceships['NORMANDIA'])
+            print(spaceships['PROTECTOR'])
+            skip()
+            continue
+
         elif options == 2:
             print("="*30)
             ship_take = input("Choose your spaceship: (press 1 or 2)").upper()
-
             if ship_take == "1":
-                inventory['fuel'] = 500
-                inventory['armor'] = 7
+                inventory['fuel'] = 700
+                inventory['Armor'] = 7
                 break
             elif ship_take == "2":
-                inventory['fuel'] = 300
-                inventory['armor'] = 10
+                inventory['fuel'] = 400
+                inventory['Armor'] = 10
                 break
-            else:
-                os.system('clear')
-                continue
         else:
             os.system('clear')
             continue
     print("="*180)
     print('''
              Fuel: {}
-             armor: {}'''
-             .format(inventory['fuel'], inventory['armor']))
+             Armor: {}'''
+             .format(inventory['fuel'], inventory['Armor']))
     print("="*180)
 
 
 def skip():
     print("press S to move further or Q to quit")
-    skip = getch()
+    skip = getch().lower()
     os.system('clear')
-    if skip.lower() == "q":
+    if skip == "q":
         x = "exit"
         game_end()
 
@@ -81,7 +73,6 @@ def add_to_inventory(inventory, added_items):
 def print_table(inventory, order='count,desc'):
     '''Function that prints table in diffrent order depending on input'''
 
-    inventory['fuel'] -= 1
     print("Inventory: ")
     words = []
     for key in inventory.keys():

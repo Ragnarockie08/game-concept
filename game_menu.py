@@ -78,9 +78,9 @@ def print_info():
                                                                                     A - move left
                                                                                     D - move right
                                                                                  Elements to collect:
-                                                                                    ⛰️ - Platyna
-                                                                                    + - Iryd
-                                                                                    & - Pallad
+                                                                                    ⛰️ - Platinum
+                                                                                    + - Iridium
+                                                                                    & - Palladium
                                                                                     % - Fuel
                                                                            ----------------------------------
                                                                             TO COLLECT ELEMENTS MOVE ON THEM
