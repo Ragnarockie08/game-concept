@@ -80,14 +80,6 @@ def getch():
     return ch
 
 
-def highscore(start_time, end_time):
-    username = input("Enter yout username!")
-    time = str(int(end_time) - int(start_time))
-    date = strftime("%d.%m.%Y %H:%M")
-
-    highscore = username + date + time
-    return highscore
-
 def collect_elements(board, x, y, inventory):
 
     if board[y][x] == '*':
@@ -132,8 +124,9 @@ def main():
             board = create_board(board, 'stage1.txt')
         collect_elements(board, x, y, inventory)
         if inventory['fuel'] < 1:
-             break
-             game_end()
+            end_time = time.time()
+            time_game = end_time - start_time
+            game_end(time_game)
         elif board[y][x] == '8' or level == 2:
             level = 2
             board = create_board(board, 'maze_board.txt')
