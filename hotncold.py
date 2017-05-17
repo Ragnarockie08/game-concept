@@ -1,5 +1,6 @@
 import random
 import sys
+from game_inventory import inventory
 
 
 
@@ -54,5 +55,5 @@ def hot_cold():
 
             tries += 1
         print('You got it!')
-        
+
         break

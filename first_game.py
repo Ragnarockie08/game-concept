@@ -86,6 +86,8 @@ def collect_elements(board, x, y, inventory):
             inventory['Iryd'] += 10
     if board[y][x] == '%':
         inventory['fuel'] += 50
+    elif board[y][x] == '!':
+        inventory['armor'] -= 1
     suma = [inventory['Platyna'], inventory['Pallad'], inventory['Iryd']]
     if sum(suma) == 300:
         inventory['Weapons'] = 1
