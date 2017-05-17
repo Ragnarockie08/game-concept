@@ -22,10 +22,31 @@ def guess_digit():
     print("You right. Welcome in the huhu")
 
 
+def test_milk_galaxy():
+    question_list = ["aaa? ", "bbb? ", "ccc? ", "ddd? "]
+    answer_list = ["1", "2", "3", "4"]
 
-'''def test_milk_galaxy:
+    random_digit = range(0, 4)
+    random_digit = random.choice(random_digit)
+    tries = 3
+
+    while True:
+        guess = input("".join([question_list[random_digit]]))
+
+        if guess == answer_list[random_digit]:
+            print("Cool. Welcome in main Galaxy")
+            break
+        else:
+            tries -= 1
+            if tries < 0:
+                print("Lose")
+            print("Try again. You have tries: " , tries)
+            continue
+
+    print("aaaa")
+
 
 
 
 # guess_digit()
-test_milk_galaxy()'''
+test_milk_galaxy()
