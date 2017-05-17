@@ -140,13 +140,13 @@ def main():
             end_time = time.time()
             time_game = end_time - start_time
             game_end(time_game)
-        elif board[y][x] == '8':
+        elif board[y][x] == '8' or level == 2:
             level = 2
             board = create_board(board, 'maze_board.txt')
-        elif board[y][x] == '9':
+        elif board[y][x] == '9' or level == 3:
             level = 3
             board = create_board(board, 'maze_board2.txt')
-        elif board[y][x] == '7':
+        elif board[y][x] == '7' or level == 4:
             if inventory['Weapons'] == 1:
                 level = 4
                 if boss_fight == 'on' and board[y][x] == 'P':
@@ -154,6 +154,10 @@ def main():
                     boss_fight = 'off'
                 board = create_board(board, 'boss_map.txt')
         elif board[y][x] == '0':
+            
+            level = 1
+            board = create_board(board, 'stage1.txt')
+        elif board[y][x] == '1':
             level = 1
             board = create_board(board, 'stage1.txt')
         os.system('clear')

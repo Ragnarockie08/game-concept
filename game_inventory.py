@@ -1,3 +1,4 @@
+import os
 import csv
 from game_start import *
 
@@ -17,14 +18,14 @@ def choose_spaceship():
         try:
             options = int(input("1: Hints about ships \n2: Choose your ship"))
         except ValueError:
-            clear()
+            os.system('clear')
             continue
         if options == 1:
             try:
                 print("="*30)
                 choose = input("Choose spaceship to see what abilities it has: ").upper()
             except ValueError:
-                clear()
+                os.system('clear')
                 continue
             if choose in spaceships.keys():
                 print(spaceships[choose])
@@ -43,10 +44,10 @@ def choose_spaceship():
                 inventory['armor'] = 10
                 break
             else:
-                clear()
+                os.system('clear')
                 continue
         else:
-            clear()
+            os.system('clear')
             continue
     print("="*180)
     print('''

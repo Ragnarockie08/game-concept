@@ -9,11 +9,6 @@ from first_game import getch
 from highscore import *
 
 
-def clear():
-    os.system('clear')
-
-
-
 def welcome_screen():
 
     os.system('clear')
