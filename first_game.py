@@ -16,7 +16,6 @@ class colours:
     Bold = '\033[1m'
     Underline = '\033[4m'
     Red = '\033[31m'
-    Purple = '\033[45m'
 
 
 class background:
@@ -46,17 +45,25 @@ def print_board(board):
     for row in board:
         for char in row:
             if char == '#':
-                    print(background.red + colours.Red + char + colours.Barier, end='')
+                    print(background.blue + colours.Blue + char + colours.Barier, end='')
             elif char == '@':
                 print(colours.Blue + char, end='')
             elif char == '8':
                 print(background.cyan + colours.Yellow + char + colours.Barier, end='')
             elif char == '*':
-                print(colours.Purple + '⛰️' + colours.Barier, end='')
+                print(background.lightgrey + '⛰️' + colours.Barier, end='')
             elif char == '%':
                 print(colours.Red + char + colours.Barier, end='')
+            elif char == '<':
+                print(colours.Red + char + colours.Barier, end='')
+            elif char == '>':
+                print(colours.Red + char + colours.Barier, end='')
+            elif char == '(':
+                print(colours.Red + char + colours.Barier, end='')
+            elif char == ')':
+                print(colours.Red + char + colours.Barier, end='')
             elif char == 'P':
-                print(background.blue + colours.Blue + char + colours.Barier, end='')
+                print(background.lightgrey + colours.Blue + char + colours.Barier, end='')
             else:
                 print(colours.Green + char + colours.Barier, end='')
         print(end='\n')
@@ -76,17 +83,17 @@ def collect_elements(stage_item):
     if stage_item == elements[0]:
         inventory['fuel'] += 50
     elif stage_item == elements[1]:
-        inventory['Platyna'] += 10
+        inventory['Platinum'] += 10
     elif stage_item == elements[2]:
-        inventory['Iryd'] += 10
+        inventory['Iridium'] += 10
     elif stage_item == elements[3]:
-        inventory['Pallad'] += 10
-    suma = (inventory['Platyna'], inventory['Pallad'], inventory['Iryd'])
+        inventory['Palladium'] += 10
+    suma = (inventory['Platinum'], inventory['Palladium'], inventory['Iridium'])
     if sum(suma) == 300:
         inventory['Weapons'] = 1
-        inventory['Pallad'] = 0
-        inventory['Platyna'] = 0
-        inventory['Iryd'] = 0
+        inventory['Palladium'] = 0
+        inventory['Platinum'] = 0
+        inventory['Iridium'] = 0
 
 
 def change_board(board_char):
@@ -95,12 +102,12 @@ def change_board(board_char):
     if board_char == '8':
         board = create_board('boss_map.txt')
     elif board_char == '9':
+        entrance = 1
         board = create_board('maze_board2.txt')
     elif board_char == '7':
+        entrance = 2
         board = create_board('maze_board.txt')
-    elif board_char == '1':
-        board = create_board('stage1.txt')
-    elif board_char == '0':
+    elif board_char == '1' or '0':
         board = create_board('stage1.txt')
     elif board_char == 'P':
         hot_cold()
@@ -132,19 +139,19 @@ def move_player(x, y):
 
 def main():
 
-    #print_menu()
-    #welcome_screen()
+    print_menu()
+    welcome_screen()
     start_time = time.time()
     board = create_board('stage1.txt')
     board_copy = create_board('stage1.txt')
     x = 5
     y = 5
-    walls = ['#', '''\'''', '/', '|', '-', 'U', 'k', 'l', 'a', 'd', 'r', 'e', 'p', 'H', 'u', 's', 'F']
+    obstacles = ['#', '/', '(', ')', '|', '-', 'U', 'k', 'l', 'a', 'd', 'r', 'e', 'p', 'H', 'u', 's', 'F', 'i']
     while True:
         player_position = move_player(x, y)
         if inventory['fuel'] < 1:
             break
-        if board[player_position[1]][player_position[0]] not in walls:
+        if board[player_position[1]][player_position[0]] not in obstacles:
             board_char = board[player_position[1]][player_position[0]]
             board[player_position[1]][player_position[0]] = "@"
             board[y][x] = ' '
@@ -155,8 +162,6 @@ def main():
             if board_char == '8':
                 if inventory['Weapons'] == 1:
                     board = change_board(board_char)
-                else:
-                    board[y][x] = '8'
         collect_elements(board_char)
         os.system('clear')
         print_board(board)
