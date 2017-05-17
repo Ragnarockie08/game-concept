@@ -1,6 +1,21 @@
-from first_game import *
+def diamond(n):
 
-    def kepler():
-        if board[x][y] == board[22][71]:
-            file_name = main_stage('maze_board', board)
-        return file_name
+    if n % 2 == 0 or n < 1:
+        None
+
+    result = []
+    middle = n // 2 + 1
+    print(middle)
+    for i in range(0, middle):
+        star_count = n - (i*2)
+        lenght = star_count + i
+        line = ("*"*star_count).rjust(lenght)
+        result.append(line)
+        if i > 0:
+            result.insert(0, line)
+    return "\n".join(result) + "\n"
+
+if __name__ == '__main__':
+    print(diamond(5))
+    print(diamond(7))
+    print(diamond(13))
