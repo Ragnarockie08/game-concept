@@ -165,6 +165,12 @@ def main():
         collect_elements(board_char)
         os.system('clear')
         print_board(board)
+
+    end_time = time.time()
+    time_game = end_time - start_time
+    add_highscore(time_game)
+    # game_end()
+
     os.system('clear')
     print(lose)
 
