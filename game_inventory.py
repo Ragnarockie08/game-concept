@@ -3,7 +3,7 @@ import csv
 from game_start import *
 from game_menu import getch
 
-inventory = {'Platyna': 0, 'Pallad': 0, 'Iryd': 0, 'Weapons': 0, 'fuel': 0, 'Armor': 0}
+inventory = {'Platyna': 0, 'Pallad': 0, 'Iryd': 0, 'Weapons': 1, 'fuel': 30000, 'Armor': 5}
 
 def choose_spaceship():
     spaceships = {"NORMANDIA": "NORMANDIA IS FAST BUT WASTE MORE FUEL THEN THE OTHERS",
@@ -81,7 +81,6 @@ def add_to_inventory(inventory, added_items):
 def print_table(inventory, order='count,desc'):
     '''Function that prints table in diffrent order depending on input'''
 
-    inventory['fuel'] -= 1
     print("Inventory: ")
     words = []
     for key in inventory.keys():

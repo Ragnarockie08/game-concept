@@ -8,8 +8,6 @@ from hotncold import *
 from riddles import *
 
 
-WALLS = ['#', '''\'''', '/', '|', '-']
-
 class colours:
     Blue = '\033[94m'
     Green = '\033[92m'
@@ -32,22 +30,18 @@ class background:
     lightgrey = '\033[47m'
 
 
-def create_board(board, filename='stage1.txt'):
+def create_board(filename='stage1.txt'):
 
-    with open(filename, 'r') as f:
-        content = f.readlines()
-        content = [x.strip() for x in content]
-        board = []
-        char = ''
-        for line in content:
-            board.append(list(line))
-        return board
+    board = []
+    current_board = open(filename).readlines()
+    for line in current_board:
+        board.append(list(line.strip()))
+    return board
 
 
 
 def print_board(board):
 
-    monster = ['<', '>', ',', '.', "'"]
 
     for row in board:
         for char in row:
@@ -59,7 +53,7 @@ def print_board(board):
                 print(background.cyan + colours.Yellow + char + colours.Barier, end='')
             elif char == '*':
                 print(colours.Purple + '⛰️' + colours.Barier, end='')
-            elif char in monster:
+            elif char == '%':
                 print(colours.Red + char + colours.Barier, end='')
             elif char == 'P':
                 print(background.blue + colours.Blue + char + colours.Barier, end='')
@@ -75,82 +69,99 @@ def insert_player(board, x, y):
     return board
 
 
-def collect_elements(board, x, y, inventory):
+def collect_elements(stage_item):
 
-    if inventory['Weapons'] == 0:
-        if board[y][x] == '*':
-            inventory['Platyna'] += 10
-        elif board[y][x] == '&':
-            inventory['Pallad'] += 10
-        elif board[y][x] == '+':
-            inventory['Iryd'] += 10
-    if board[y][x] == '%':
+    elements = ['%', '*', '+', '&']
+
+    if stage_item == elements[0]:
         inventory['fuel'] += 50
-    elif board[y][x] == '!':
-        inventory['armor'] -= 1
-    suma = [inventory['Platyna'], inventory['Pallad'], inventory['Iryd']]
+    elif stage_item == elements[1]:
+        inventory['Platyna'] += 10
+    elif stage_item == elements[2]:
+        inventory['Iryd'] += 10
+    elif stage_item == elements[3]:
+        inventory['Pallad'] += 10
+    suma = (inventory['Platyna'], inventory['Pallad'], inventory['Iryd'])
     if sum(suma) == 300:
         inventory['Weapons'] = 1
-        inventory['Platyna'] = 0
         inventory['Pallad'] = 0
+        inventory['Platyna'] = 0
         inventory['Iryd'] = 0
 
 
-def move_player(board, x, y):
+def change_board(board_char):
 
-    pressed_key = getch()
-    if pressed_key == 'w' and board[y - 1][x] not in WALLS:
-        y -= 1
-    elif pressed_key == 's' and board[y + 1][x] not in WALLS:
-        y += 1
-    elif pressed_key == 'a' and board[y][x - 1] not in WALLS:
-        x -= 1
-    elif pressed_key == 'd' and board[y][x + 1] not in WALLS:
-        x += 1
-    elif pressed_key == 'x':
-        x = "exit"
-    return x, y
+    board = None
+    if board_char == '8':
+        board = create_board('boss_map.txt')
+    elif board_char == '9':
+        board = create_board('maze_board2.txt')
+    elif board_char == '7':
+        board = create_board('maze_board.txt')
+    elif board_char == '1':
+        board = create_board('stage1.txt')
+    elif board_char == '0':
+        board = create_board('stage1.txt')
+    elif board_char == 'P':
+        hot_cold()
+        game_end()
+    return board
+
+
+def move_player(x, y):
+
+    pressed_key = getch().lower()
+    current_x = x
+    current_y = y
+    if pressed_key == 'a':
+        current_x -= 1
+        inventory['fuel'] -= 1
+    elif pressed_key == "d":
+        current_x += 1
+        inventory['fuel'] -= 1
+    elif pressed_key == "w":
+        current_y -= 1
+        inventory['fuel'] -= 1
+    elif pressed_key == "s":
+        current_y += 1
+        inventory['fuel'] -= 1
+    elif pressed_key == "x":
+        game_end()
+
+    return [current_x, current_y]
 
 def main():
 
+    #print_menu()
+    #welcome_screen()
+    start_time = time.time()
+    board = create_board('stage1.txt')
+    board_copy = create_board('stage1.txt')
     x = 5
     y = 5
-    board = []
-    level = 1
-    boss_fight = 'on'
-
-    print_menu()
-    welcome_screen()
-    start_time = time.time()
-    while x != 'exit':
-        if level == 1:
-            board = create_board(board, 'stage1.txt')
-        collect_elements(board, x, y, inventory)
+    walls = ['#', '''\'''', '/', '|', '-', 'U', 'k', 'l', 'a', 'd', 'r', 'e', 'p', 'H', 'u', 's', 'F']
+    while True:
+        player_position = move_player(x, y)
         if inventory['fuel'] < 1:
             break
-        elif board[y][x] == '7' or level == 2:
-            level = 2
-            board = create_board(board, 'maze_board.txt')
-        elif board[y][x] == '9' or level == 3:
-            level = 3
-            board = create_board(board, 'maze_board2.txt')
-        elif board[y][x] == '8' or level == 4:
-            if inventory['Weapons'] == 1:
-                level = 4
-                if boss_fight == 'on' and board[y][x] == 'P':
-                    hot_cold()
-                    boss_fight = 'off'
-                board = create_board(board, 'boss_map.txt')
-        if board[y][x] == '0':
-            guess_digit()
-            level = 1
-        if board[y][x] == '1':
-            level = 1
+        if board[player_position[1]][player_position[0]] not in walls:
+            board_char = board[player_position[1]][player_position[0]]
+            board[player_position[1]][player_position[0]] = "@"
+            board[y][x] = ' '
+            x = player_position[0]
+            y = player_position[1]
+            if board_char in ['9', '7', '0', '1', 'P']:
+                board = change_board(board_char)
+            if board_char == '8':
+                if inventory['Weapons'] == 1:
+                    board = change_board(board_char)
+                else:
+                    board[y][x] = '8'
+        collect_elements(board_char)
         os.system('clear')
-        board = insert_player(board, x, y)
         print_board(board)
-        x, y = move_player(board, x, y)
-    game_end()
+    os.system('clear')
+    print(lose)
 
 
 if __name__ == "__main__":

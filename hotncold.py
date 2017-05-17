@@ -1,11 +1,13 @@
 import random
+import os
 import sys
 from game_inventory import inventory
+from text import lose, win
 
 
 
 def hot_cold():
-    while True:
+    while inventory['Armor'] > 0:
         print('I am thinking of a 3-digit number. Try to guess what it is.\n\
               Here are some clues:\n\
               When I say:    That means:\n\
@@ -16,7 +18,6 @@ def hot_cold():
 
         random_digit = range(100, 1000)
         random_digit = str(random.choice(random_digit))
-        print(random_digit)
 
         tries = 1
         digit_input = input("Guess digit: ")
@@ -50,10 +51,17 @@ def hot_cold():
                     count_cold += 1
             if count_cold == 3:
                 print("Cold")
+                inventory['Armor'] -= 1
             else:
                 print("Hot " * count_hot, " Warm" * count_warm)
 
             tries += 1
-        print('You got it!')
 
-        break
+        if digit_input == random_digit:
+            os.system('clear')
+            print(win)
+            sys.exit()
+        else:
+            os.system('clear')
+            print(lose)
+            sys.exit()
