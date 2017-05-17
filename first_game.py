@@ -5,6 +5,7 @@ from text import *
 from game_start import *
 from game_inventory import *
 from game_menu import *
+from hotncold import *
 
 
 WALLS = ['#', '''\'''', '/', '|', '-']
@@ -54,19 +55,23 @@ def print_board(board):
                 print(colours.Blue + char, end='')
             elif char == '8':
                 print(background.cyan + colours.Yellow + char + colours.Barier, end='')
+            elif char == '$':
+                print('')
             elif char == '*':
                 print(colours.Purple + '⛰️', end='')
+            elif char == 'P':
+                print(background.blue + colours.Blue + char + colours.Barier, end='')
             else:
                 print(colours.Green + char + colours.Barier, end='')
         print(end='\n')
     print(print_table(inventory))
 
 
-
 def insert_player(board, x, y):
 
     board[y][x] = "@"
     return board
+
 
 def getch():
 
@@ -82,15 +87,22 @@ def getch():
 
 def collect_elements(board, x, y, inventory):
 
-    if board[y][x] == '*':
-        inventory['Platyna'] += 10
 
-    elif board[y][x] == '&':
-        inventory['Pallad'] += 10
-    elif board[y][x] == '+':
-        inventory['Iryd'] += 10
+    if inventory['Weapons'] == 0:
+        if board[y][x] == '*':
+            inventory['Platyna'] += 10
+        elif board[y][x] == '&':
+            inventory['Pallad'] += 10
+        elif board[y][x] == '+':
+            inventory['Iryd'] += 10
     elif board[y][x] == '%':
         inventory['fuel'] += 50
+    suma = [inventory['Platyna'], inventory['Pallad'], inventory['Iryd']]
+    if sum(suma) == 300:
+        inventory['Weapons'] = 1
+        inventory['Platyna'] -= sum(suma)/3
+        inventory['Pallad'] -= sum(suma)/3
+        inventory['Iryd'] -= sum(suma)/3
 
 
 def move_player(board, x, y):
@@ -115,9 +127,10 @@ def main():
     y = 5
     board = []
     level = 1
+    boss_fight = 'on'
 
-    #print_menu()
-    #welcome()
+    print_menu()
+    welcome_screen()
     start_time = time.time()
     while x != 'exit':
         if level == 1:
@@ -127,15 +140,19 @@ def main():
             end_time = time.time()
             time_game = end_time - start_time
             game_end(time_game)
-        elif board[y][x] == '8' or level == 2:
+        elif board[y][x] == '8':
             level = 2
             board = create_board(board, 'maze_board.txt')
-        elif board[y][x] == '9' or level == 3:
+        elif board[y][x] == '9':
             level = 3
             board = create_board(board, 'maze_board2.txt')
-        elif board[y][x] == '7' or level == 4:
-            level = 4
-            board = create_board(board, 'maze_board2.txt')
+        elif board[y][x] == '7':
+            if inventory['Weapons'] == 1:
+                level = 4
+                if boss_fight == 'on' and board[y][x] == 'P':
+                    hot_cold()
+                    boss_fight = 'off'
+                board = create_board(board, 'boss_map.txt')
         elif board[y][x] == '0':
             level = 1
             board = create_board(board, 'stage1.txt')
@@ -144,10 +161,7 @@ def main():
         print_board(board)
         x, y = move_player(board, x, y)
     end_time = time.time()
-    export_to_csv = highscore(start_time, end_time)
-    save_highscore(export_to_csv)
-    highscore_table = read_highscore()
-    print_highscore(highscore_table)
+    print(highscore(start_time, end_time))
 
 
 if __name__ == "__main__":
