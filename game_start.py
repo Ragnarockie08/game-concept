@@ -6,6 +6,7 @@ import sys
 import csv
 from game_inventory import choose_spaceship, skip
 from first_game import getch
+from first_game import *
 from highscore import *
 
 
@@ -21,10 +22,8 @@ def welcome_screen():
 def game_end():
 
     os.system('clear')
-    # highscore(end_time)
     print(end)
     print("Thanks for playing and see you next time")
-
 
     time.sleep(2)
     sys.exit()

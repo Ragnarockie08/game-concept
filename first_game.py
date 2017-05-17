@@ -148,7 +148,11 @@ def main():
         board = insert_player(board, x, y)
         print_board(board)
         x, y = move_player(board, x, y)
-    game_end()
+
+    end_time = time.time()
+    time_game = end_time - start_time
+    add_highscore(time_game)
+    # game_end()
 
 
 if __name__ == "__main__":
