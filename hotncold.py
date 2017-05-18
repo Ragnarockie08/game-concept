@@ -1,27 +1,34 @@
 import random
 import os
 import sys
+import time
 from game_inventory import inventory
-from text import lose, win
+from text import lose, win, boss_fight
 
 
 
 def hot_cold():
-    while inventory['Armor'] > 0:
+    print(boss_fight)
+    random_digit = range(100, 1000)
+    random_digit = str(random.choice(random_digit))
+
+    tries = 1
+    while True:
         print('I am thinking of a 3-digit number. Try to guess what it is.\n\
               Here are some clues:\n\
               When I say:    That means:\n\
               Cold       No digit is correct.\n\
               Warm       One digit is correct but in the wrong position.\n\
               Hot        One digit is correct and in the right position.\n\
-              I have thought up a number. You have 10 guesses to get it.')
+              I have thought up a number. You have {} guesses to get it.'.format(inventory['Armor']))
 
         random_digit = range(100, 1000)
         random_digit = str(random.choice(random_digit))
+        print(random_digit)
 
         tries = 1
         digit_input = input("Guess digit: ")
-        while digit_input != random_digit:
+        while inventory['Armor'] > 0:
             print('Guess #', tries)
             if tries == 1:
                 pass
@@ -55,16 +62,20 @@ def hot_cold():
                 print("Armor: ", inventory['Armor'])
             else:
                 print("Hot " * count_hot, " Warm" * count_warm)
+                inventory['Armor'] -= 1
                 print("Armor: ", inventory['Armor'])
+
 
             tries += 1
 
-        if digit_input == random_digit:
-            os.system('clear')
-            print(win)
-            print('''                                               Armor left: {}'''.format(inventory['Armor']))
-            sys.exit()
-        else:
-            os.system('clear')
-            print(lose)
-            sys.exit()
+            if digit_input == random_digit:
+                os.system('clear')
+                print(win)
+                print('''                                                                                  Armor left: {}'''.format(inventory['Armor']))
+                break
+            elif inventory['Armor'] < 1:
+                time.sleep(2)
+                os.system('clear')
+                print(lose)
+                time.sleep(2)
+        break

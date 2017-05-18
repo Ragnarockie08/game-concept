@@ -6,6 +6,7 @@ from game_inventory import *
 from game_menu import *
 from hotncold import *
 from riddles import *
+from highscore import *
 
 
 class colours:
@@ -95,16 +96,15 @@ def change_board(board_char):
     if board_char == '8':
         board = create_board('boss_map.txt')
     elif board_char == '9':
-        entrance = 1
         board = create_board('maze_board2.txt')
     elif board_char == '7':
-        entrance = 2
         board = create_board('maze_board.txt')
-    elif board_char == '1' or '0':
-        if board_char == '1':
-            guess_digit()
-        elif board_char == '0':
-            board = create_board('stage1.txt')
+    if board_char == '1':
+        guess_digit()
+        board = create_board('stage1.txt')
+    if board_char == '0':
+        test_milk_galaxy()
+        board = create_board('stage1.txt')
 
     return board
 
@@ -133,6 +133,7 @@ def move_player(x, y):
 
 def main():
 
+    lvl = 1
     print_menu()
     welcome_screen()
     start_time = time.time()
@@ -144,6 +145,7 @@ def main():
     while True:
         player_position = move_player(x, y)
         if inventory['fuel'] < 1:
+            print(lose)
             break
         if board[player_position[1]][player_position[0]] not in obstacles:
             board_char = board[player_position[1]][player_position[0]]
@@ -159,7 +161,7 @@ def main():
             elif board_char == 'P':
                 os.system('clear')
                 hot_cold()
-                game_end()
+                break
         collect_elements(board_char)
         os.system('clear')
         print_board(board)
@@ -167,10 +169,6 @@ def main():
     end_time = time.time()
     time_game = end_time - start_time
     add_highscore(time_game)
-    # game_end()
-
-    os.system('clear')
-    print(lose)
 
 
 if __name__ == "__main__":

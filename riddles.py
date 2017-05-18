@@ -1,4 +1,6 @@
 import random
+from game_inventory import inventory
+import time
 
 def guess_digit():
     random_digit = range(0, 10)
@@ -8,18 +10,23 @@ def guess_digit():
     print("Guess digit. From 0 into 10.")
 
     while True:
+        if inventory['Armor'] < 1:
+            print(lose)
         tries = 1
         print('Guess #', tries)
         guess_digit = input("Guess a digit: ")
         if guess_digit > random_digit:
             print("Too much")
+            inventory['Armor'] -= 1
             continue
         elif guess_digit < random_digit:
             print("Too little")
+            inventory['Armor'] -= 1
             continue
         else:
             break
-    print("You right. Welcome in the huhu")
+        tries += 1
+
 
 
 def test_milk_galaxy():
@@ -28,7 +35,6 @@ def test_milk_galaxy():
 
     random_digit = range(0, 4)
     random_digit = random.choice(random_digit)
-    tries = 3
 
     while True:
         guess = input("".join([question_list[random_digit]]))
@@ -37,16 +43,9 @@ def test_milk_galaxy():
             print("Cool. Welcome in main Galaxy")
             break
         else:
-            tries -= 1
-            if tries < 0:
-                print("Lose")
-            print("Try again. You have tries: " , tries)
-            continue
-
-    print("aaaa")
-
-
-
-
-# guess_digit()
-test_milk_galaxy()
+            inventory['Armor'] -= 1
+            if inventory['Armor'] < 0:
+                print(lose)
+                add_highscore()
+                time.sleep(5)
+                sys.exit()
