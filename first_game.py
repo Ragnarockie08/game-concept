@@ -164,10 +164,9 @@ def main():
             if board_char in ['0', '1']:
                 board = change_board(board_char)
             elif board_char == '9':
-                    board = change_board(board_char)
+                board = change_board(board_char)
             elif board_char == '7':
-                if inventory['Level']:
-                    board = change_board(board_char)
+                board = change_board(board_char)
             elif board_char == '8':
                 if inventory['Weapons'] == 1:
                     board = change_board(board_char)
