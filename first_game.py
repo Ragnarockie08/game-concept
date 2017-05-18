@@ -3,7 +3,8 @@ import time
 from text import *
 from game_start import *
 from game_inventory import Inventory, print_table
-from game_menu import print_menu, getch
+from game_menu import print_menu
+from read_key import getch
 from hotncold import hot_cold
 from riddles import guess_digit, test_milk_galaxy
 from highscore import *

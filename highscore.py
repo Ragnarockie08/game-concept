@@ -1,6 +1,5 @@
 import datetime
 import csv
-from first_game import time
 from text import highscore, title
 from color import *
 from game_inventory import Inventory

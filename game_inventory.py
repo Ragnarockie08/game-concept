@@ -1,7 +1,6 @@
 import os
-import csv
 from game_start import *
-from game_menu import getch
+from read_key import getch
 
 def Inventory():
     inventory = {'Platinum': 0, 'Palladium': 0, 'Iridium': 0, 'Weapons': 1, 'fuel': 300, 'Armor': 5, 'Level': 1, 'Key': 0}

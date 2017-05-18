@@ -1,8 +1,7 @@
 import os
 import sys
 from text import welcom
-import sys, tty, termios
-
+from read_key import getch
 def print_menu():
     while True:
         os.system('clear')
@@ -17,18 +16,6 @@ def print_menu():
         choice = print_choices()
         if choice == "s":
             break
-
-
-def getch():
-
-    fd = sys.stdin.fileno()
-    old_settings = termios.tcgetattr(fd)
-    try:
-        tty.setraw(sys.stdin.fileno())
-        ch = sys.stdin.read(1)
-    finally:
-        termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
-    return ch
 
 
 def print_choices():
