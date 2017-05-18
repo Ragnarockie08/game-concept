@@ -15,8 +15,9 @@ def guess_digit():
         print("="* 40)
         if inventory['Armor'] < 1:
             print(lose)
-            game_end()
-            break
+            add_highscore()
+            time.sleep(5)
+            sys.exit()
         print('Guess #', tries)
         guess_digit = input("Guess a digit: ")
         if guess_digit > random_digit:
@@ -35,7 +36,7 @@ def guess_digit():
 
 
 def test_milk_galaxy():
-    question_list = ["Which one is Earth from the Sun in Solar System? ", "How many stars are in the Solar System?,
+    question_list = ["Which one is Earth from the Sun in Solar System? ", "How many stars are in the Solar System?",
     "How many moons does Earth have? ", "How many moons does Mars have? "]
     answer_list = ["3", "1", "1", "2"]
 

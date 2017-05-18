@@ -129,6 +129,7 @@ def main():
     while True:
         player_position = move_player(x, y)
         if inventory['fuel'] < 1:
+            os.system('clear')
             print(lose)
             break
         if board[player_position[1]][player_position[0]] not in obstacles:
