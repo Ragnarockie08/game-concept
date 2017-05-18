@@ -52,14 +52,17 @@ def hot_cold():
             if count_cold == 3:
                 print("Cold")
                 inventory['Armor'] -= 1
+                print("Armor: ", inventory['Armor'])
             else:
                 print("Hot " * count_hot, " Warm" * count_warm)
+                print("Armor: ", inventory['Armor'])
 
             tries += 1
 
         if digit_input == random_digit:
             os.system('clear')
             print(win)
+            print('''                                               Armor left: {}'''.format(inventory['Armor']))
             sys.exit()
         else:
             os.system('clear')

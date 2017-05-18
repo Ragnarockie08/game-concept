@@ -32,15 +32,14 @@ class background:
 def create_board(filename='stage1.txt'):
 
     board = []
-    current_board = open(filename).readlines()
-    for line in current_board:
-        board.append(list(line.strip()))
+    with open(filename) as txtfile:
+        current_board = txtfile.readlines()
+        for line in current_board:
+            board.append(list(line.strip()))
     return board
 
 
-
 def print_board(board):
-
 
     for row in board:
         for char in row:
@@ -68,12 +67,6 @@ def print_board(board):
                 print(colours.Green + char + colours.Barier, end='')
         print(end='\n')
     print(print_table(inventory))
-
-
-def insert_player(board, x, y):
-
-    board[y][x] = "@"
-    return board
 
 
 def collect_elements(stage_item):
@@ -108,10 +101,11 @@ def change_board(board_char):
         entrance = 2
         board = create_board('maze_board.txt')
     elif board_char == '1' or '0':
-        board = create_board('stage1.txt')
-    elif board_char == 'P':
-        hot_cold()
-        game_end()
+        if board_char == '1':
+            guess_digit()
+        elif board_char == '0':
+            board = create_board('stage1.txt')
+
     return board
 
 
@@ -146,7 +140,7 @@ def main():
     board_copy = create_board('stage1.txt')
     x = 5
     y = 5
-    obstacles = ['#', '/', '(', ')', '|', '-', 'U', 'k', 'l', 'a', 'd', 'r', 'e', 'p', 'H', 'u', 's', 'F', 'i']
+    obstacles = ['#', '.', '/', '(', ')', '|', '=', '-', 'U', 'k','n', 'l', 'a', 'd', 'r', 'e', 'p', 'H', 'u', 's', 'F', 'i']
     while True:
         player_position = move_player(x, y)
         if inventory['fuel'] < 1:
@@ -157,11 +151,15 @@ def main():
             board[y][x] = ' '
             x = player_position[0]
             y = player_position[1]
-            if board_char in ['9', '7', '0', '1', 'P']:
+            if board_char in ['9', '7', '0', '1']:
                 board = change_board(board_char)
             if board_char == '8':
                 if inventory['Weapons'] == 1:
                     board = change_board(board_char)
+            elif board_char == 'P':
+                os.system('clear')
+                hot_cold()
+                game_end()
         collect_elements(board_char)
         os.system('clear')
         print_board(board)
