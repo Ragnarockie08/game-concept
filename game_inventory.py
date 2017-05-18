@@ -2,7 +2,7 @@ import os
 from game_start import *
 from read_key import getch
 
-inventory = {'Platinum': 0, 'Palladium': 0, 'Iridium': 0, 'Weapons': 1, 'fuel': 0, 'Armor': 0, 'Level': 1, 'Key': 0}
+inventory = {'Platinum': 0, 'Palladium': 0, 'Iridium': 0, 'Weapons': 0, 'fuel': 0, 'Armor': 0, 'Level': 1, 'Part1': 0, 'Part2': 0}
 
 
 def skip():

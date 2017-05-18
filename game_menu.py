@@ -51,7 +51,7 @@ def show_plot():
 
 
 
-                          Your main mission is defeating the Space pirates boss stationed in Feniks system, but first you have to collect elements and keys necesarry to build your weapon.
+                          Your main mission is defeating the Space pirates boss stationed in Feniks system, but first you have to collect elements and weapon parts necesarry to build your gun.
                           Elements are arranged around the other systems. You will be travaling in your spaceship which will lose fuel so look out for this and collect
                           fuel when necessary! When you will have enough resources the weapon will apear in your inventory and you will be able to travel into Feniks system to face the boss!
                                                                        Good luck and have fun !
@@ -71,8 +71,8 @@ def print_info():
                                                                                     + - Iridium
                                                                                     & - Palladium
                                                                                     % - Fuel
-                                                                                    K - key 1
-                                                                                    L - key 2
+                                                                                    K - part 1
+                                                                                    L - part 2
                                                                                  Enemy:
                                                                                     ! - Mines
                                                                            ----------------------------------
