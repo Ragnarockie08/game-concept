@@ -3,6 +3,7 @@ import csv
 from first_game import time
 from text import highscore, title
 from color import *
+from game_inventory import inventory
 
 
 def write_highscore():
@@ -13,9 +14,10 @@ def write_highscore():
         spilit_score = [line.split("|") for line in reader]
 
         for row in spilit_score:
-            score_list.append((row[0], row[1], row[2].replace("\n", "")))
+            score_list.append((row[0], row[1], row[2], row[3].replace("\n", "")))
 
-        sorted_list = sorted(score_list, key=lambda x: float(x[2]))
+        sorted_list = sorted(score_list, key=lambda x: int(x[3]), reverse = True)
+        sorted_list = sorted(sorted_list, key=lambda x: float(x[2]))
         longest_name = count_longest_name(score_list)
         print_highscore(sorted_list, longest_name)
 
@@ -25,21 +27,23 @@ def add_highscore(time):
     now = datetime.datetime.now()
 
     file_csv = open('highscore.csv', "a")
-    file_csv.write(username + "|" + str(now) + "|" + str(time) + "|" +'\n')
+    file_csv.write(username + "|" + str(now) + "|" + str(time) + "|" +  str(inventory['Level']) +'\n')
     file_csv.close()
+
     write_highscore()
+
 
 
 def print_highscore(sorted_list, longest_name):
     count_highscore = 1
     print(title)
     print(highscore)
-    print(colours.Blue + "PLACE".rjust(80), colours.Yellow + "NAME".rjust(longest_name + 4),colours.Green + "DATE".rjust(14), colours.Red+"TIME".rjust(13) + colours.Barier)
-    print("-" * (longest_name + 60)).rjust(130)
+    print(colours.Blue + "PLACE".rjust(80), colours.Yellow + "NAME".rjust(longest_name + 4),colours.Green + "DATE".rjust(14), colours.Blue +"LEVEL".rjust(9), colours.Red+"TIME".rjust(13) + colours.Barier)
+    print(("-" * (longest_name + 50)).rjust(130))
     for item in sorted_list:
-            print(str(count_highscore).rjust(80), "".join((item[0].rjust(longest_name + 4), item[1][:10].rjust(15), item[2][:4].rjust(10), " sec")))
+            print(str(count_highscore).rjust(80), "".join((item[0].rjust(longest_name + 4), item[1][:10].rjust(15), item[3].rjust(10), item[2][:4].rjust(10), " sec")))
             count_highscore += 1
-    print("-" * (longest_name + 60)).rjust(130)
+    print(("-" * (longest_name + 50)).rjust(130))
 
 
 def count_longest_name(score_list):
