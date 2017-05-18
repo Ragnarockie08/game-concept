@@ -24,8 +24,7 @@ def game_hot_cold():
 
         tries += 1
 
-        if tries == 10:
-            time.sleep(2)
+        if inventory['Armor'] == 0:
             os.system('clear')
             print(lose)
             time.sleep(2)
@@ -94,7 +93,10 @@ def check_digis(digit_input, random_digit_list):
             count_cold += 1
     if count_cold == 3:
         print("Cold")
+        inventory['Armor'] -= 1
     else:
         print("Hot " * count_hot, " Warm " * count_warm)
+        inventory['Armor'] -= 1
+    print("Armor: {}".format(inventory['Armor']))
 
     return digit_input_list

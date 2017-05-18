@@ -6,7 +6,7 @@ from game_inventory import inventory, print_table
 from game_menu import print_menu
 from read_key import getch
 from hotncold import game_hot_cold
-from riddles import guess_digit, ask_quesion
+from riddles import guess_digit, ask_question
 from highscore import *
 from color import *
 
