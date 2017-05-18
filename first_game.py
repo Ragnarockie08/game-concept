@@ -30,6 +30,10 @@ def print_board(board):
                 print(colours.Blue + char, end='')
             elif char == '8':
                 print(background.cyan + colours.Yellow + char + colours.Barier, end='')
+            elif char == '9':
+                print(background.cyan + colours.Yellow + char + colours.Barier, end='')
+            elif char == '7':
+                print(background.cyan + colours.Yellow + char + colours.Barier, end='')
             elif char == '*':
                 print(background.lightgrey + '⛰️' + colours.Barier, end='')
             elif char == '%':
@@ -52,7 +56,8 @@ def print_board(board):
 
 def collect_elements(board_char):
 
-    elements = ['%', '*', '+', '&']
+    elements = ['%', '*', '+', '&', 'K', 'L']
+    keys = 0
 
     if board_char == elements[0]:
         inventory['fuel'] += 50
@@ -62,12 +67,18 @@ def collect_elements(board_char):
         inventory['Iridium'] += 10
     elif board_char == elements[3]:
         inventory['Palladium'] += 10
+    elif board_char == elements[-1]:
+        inventory['Key'] += 1
+    elif board_char == elements[-2]:
+        inventory['Key'] += 1
     suma = (inventory['Platinum'], inventory['Palladium'], inventory['Iridium'])
-    if sum(suma) == 300:
+    if sum(suma) == 300 and inventory['Key'] == 2:
         inventory['Weapons'] = 1
         inventory['Palladium'] = 0
         inventory['Platinum'] = 0
         inventory['Iridium'] = 0
+        inventory['Key'] = 0
+
 
 
 def change_board(board_char):
@@ -116,7 +127,7 @@ def move_player(x, y):
 
 def main():
 
-    obstacles = ['#', '.', '/', '(', ')', '|', '=', '-', 'U', 'k','n', 'l', 'a', 'd', 'r', 'e', 'p', 'H', 'u', 's', 'F', 'i']
+    obstacles = ['#', '.', '/', '(', ')', '|', 'o', '=', '-', 'U', 'k','n', 'l', 'a', 'd', 'r', 'e', 'p', 'H', 'u', 's', 'F', 'i']
     lvl = 1
     print_menu()
     welcome_screen()
@@ -143,10 +154,10 @@ def main():
             if board_char in ['0', '1']:
                 board = change_board(board_char)
             elif board_char == '9':
-                if inventory['Level'] == 1:
+                if inventory['Level'] == 1 or 2:
                     board = change_board(board_char)
             elif board_char == '7':
-                if inventory['Level'] == 2:
+                if inventory['Level'] == 2 or 3:
                     board = change_board(board_char)
             elif board_char == '8':
                 if inventory['Weapons'] == 1:

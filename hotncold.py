@@ -11,7 +11,10 @@ def hot_cold():
     print(boss_fight)
     random_digit = range(100, 1000)
     random_digit = str(random.choice(random_digit))
+    print_rules()
 
+
+def print_rules():
     tries = 1
     while True:
         print('I am thinking of a 3-digit number. Try to guess what it is.\n\

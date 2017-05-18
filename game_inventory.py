@@ -3,7 +3,7 @@ import csv
 from game_start import *
 from game_menu import getch
 
-inventory = {'Platinum': 0, 'Palladium': 0, 'Iridium': 0, 'Weapons': 1, 'fuel': 300, 'Armor': 5, 'Level': 1}
+inventory = {'Platinum': 0, 'Palladium': 0, 'Iridium': 0, 'Weapons': 0, 'fuel': 300, 'Armor': 5, 'Level': 1, 'Key': 0}
 
 def choose_spaceship():
     spaceships = {"NORMANDIA": "NORMANDIA HAVE HUGE TANK",
@@ -57,17 +57,6 @@ def skip():
     if skip == "q":
         x = "exit"
         game_end()
-
-
-def add_to_inventory(inventory, added_items):
-    '''Function that add items form diffrent loots'''
-
-    for item in added_items:
-        if item in inventory.keys():
-            inventory[item] += 1
-        else:
-            inventory.update({item: 1})
-    return inventory
 
 
 def print_table(inventory, order='count,desc'):

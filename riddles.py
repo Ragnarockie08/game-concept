@@ -20,7 +20,9 @@ def guess_digit():
             sys.exit()
         print('Guess #', tries)
         guess_digit = input("Guess a digit: ")
-        if guess_digit > random_digit:
+        if guess_digit.isalpha():
+            print("Wrong input")
+        elif guess_digit > random_digit:
             print("Too much")
             inventory['Armor'] -= 1
             tries += 1
