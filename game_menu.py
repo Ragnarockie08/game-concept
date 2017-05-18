@@ -71,8 +71,8 @@ def print_info():
                                                                                     + - Iridium
                                                                                     & - Palladium
                                                                                     % - Fuel
-                                                                                    K - key 1
-                                                                                    L - key 2
+                                                                                    K - part 1
+                                                                                    L - part 2
                                                                                  Enemy:
                                                                                     ! - Mines
                                                                            ----------------------------------
