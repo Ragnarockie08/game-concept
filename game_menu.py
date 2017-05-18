@@ -82,7 +82,7 @@ def print_info():
                                                                                     + - Iridium
                                                                                     & - Palladium
                                                                                     % - Fuel
-                                                                                        Enemy:
+                                                                                 Enemy:
                                                                                     ! - Mines
                                                                            ----------------------------------
                                                                             TO COLLECT ELEMENTS MOVE ON THEM

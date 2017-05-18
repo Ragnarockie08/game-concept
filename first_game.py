@@ -1,12 +1,12 @@
 import os
-from time import time, strftime
+import time
 from text import *
 from game_start import *
 from game_inventory import inventory, print_table
-from game_menu import print_menu
+from game_menu import print_menu, getch
 from hotncold import hot_cold
 from riddles import guess_digit, test_milk_galaxy
-from highscore import add_highscore
+from highscore import *
 from color import *
 
 
@@ -74,10 +74,13 @@ def change_board(board_char):
 
     board = None
     if board_char == '8':
+        inventory['Level'] = 4
         board = create_board('boss_map.txt')
     if board_char == '9':
+        inventory['Level'] = 2
         board = create_board('maze_board2.txt')
     if board_char == '7':
+        inventory['Level'] = 3
         board = create_board('maze_board.txt')
     if board_char == '1':
         guess_digit()
@@ -113,6 +116,7 @@ def move_player(x, y):
 
 def main():
 
+    obstacles = ['#', '.', '/', '(', ')', '|', '=', '-', 'U', 'k','n', 'l', 'a', 'd', 'r', 'e', 'p', 'H', 'u', 's', 'F', 'i']
     lvl = 1
     print_menu()
     welcome_screen()
@@ -121,7 +125,7 @@ def main():
     board_copy = create_board('stage1.txt')
     x = 5
     y = 5
-    obstacles = ['#', '.', '/', '(', ')', '|', '=', '-', 'U', 'k','n', 'l', 'a', 'd', 'r', 'e', 'p', 'H', 'u', 's', 'F', 'i']
+    print_board(board)
     while True:
         player_position = move_player(x, y)
         if inventory['fuel'] < 1:
@@ -135,9 +139,15 @@ def main():
             y = player_position[1]
             if board_char == '!':
                 inventory['Armor'] -= 1
-            if board_char in ['9', '7', '0', '1']:
+            if board_char in ['0', '1']:
                 board = change_board(board_char)
-            if board_char == '8':
+            elif board_char == '9':
+                if inventory['Level'] == 1:
+                    board = change_board(board_char)
+            elif board_char == '7':
+                if inventory['Level'] == 2:
+                    board = change_board(board_char)
+            elif board_char == '8':
                 if inventory['Weapons'] == 1:
                     board = change_board(board_char)
             elif board_char == 'P':
@@ -150,6 +160,7 @@ def main():
 
     end_time = time.time()
     time_game = end_time - start_time
+    time.sleep(4)
     os.system('clear')
     add_highscore(time_game)
 
