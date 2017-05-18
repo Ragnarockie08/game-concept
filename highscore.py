@@ -2,21 +2,21 @@ import datetime
 import csv
 from first_game import time
 from text import highscore, title
+from color import *
+
 
 def write_highscore():
-    score_list = []
     with open('highscore.csv', encoding='utf-8-sig') as csvfile:
         reader = csvfile.readlines()
+        score_list = []
 
         spilit_score = [line.split("|") for line in reader]
 
         for row in spilit_score:
             score_list.append((row[0], row[1], row[2].replace("\n", "")))
 
+        sorted_list = sorted(score_list, key=lambda x: float(x[2]))
         longest_name = count_longest_name(score_list)
-
-
-        sorted_list = sorted(score_list, key=lambda name: name[2])
         print_highscore(sorted_list, longest_name)
 
 
