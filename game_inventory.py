@@ -3,7 +3,7 @@ import csv
 from game_start import *
 from game_menu import getch
 
-inventory = {'Platinum': 0, 'Palladium': 0, 'Iridium': 0, 'Weapons': 1, 'fuel': 300, 'Armor': 5}
+inventory = {'Platinum': 0, 'Palladium': 0, 'Iridium': 0, 'Weapons': 0, 'fuel': 300, 'Armor': 5}
 
 def choose_spaceship():
     spaceships = {"NORMANDIA": "NORMANDIA HAVE HUGE TANK",
@@ -30,7 +30,7 @@ def choose_spaceship():
 
         elif options == 2:
             print("="*30)
-            ship_take = input("Choose your spaceship: (press 1 or 2)").upper()
+            ship_take = input("Choose your spaceship: (press 1 or 2): ").upper()
             if ship_take == "1":
                 inventory['fuel'] = 700
                 inventory['Armor'] = 7

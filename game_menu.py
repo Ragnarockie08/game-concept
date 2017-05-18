@@ -53,19 +53,19 @@ def show_plot():
 
     print('''
 
-                                    .___  ___.      ___           _______.     _______.    _______  _______  _______  _______   ______ .___________.
-                                    |   \/   |     /   \         /       |    /       |   |   ____||   ____||   ____||   ____| /      ||           |
-                                    |  \  /  |    /  ^  \       |   (----`   |   (----`   |  |__   |  |__   |  |__   |  |__   |  ,----'`---|  |----`
-                                    |  |\/|  |   /  /_\  \       \   \        \   \       |   __|  |   __|  |   __|  |   __|  |  |         |  |
-                                    |  |  |  |  /  _____  \  .----)   |   .----)   |      |  |____ |  |     |  |     |  |____ |  `----.    |  |
-                                    |__|  |__| /__/     \__\ |_______/    |_______/       |_______||__|     |__|     |_______| \______|    |__|
+                                            .___  ___.      ___           _______.     _______.    _______  _______  _______  _______   ______ .___________.
+                                            |   \/   |     /   \         /       |    /       |   |   ____||   ____||   ____||   ____| /      ||           |
+                                            |  \  /  |    /  ^  \       |   (----`   |   (----`   |  |__   |  |__   |  |__   |  |__   |  ,----'`---|  |----`
+                                            |  |\/|  |   /  /_\  \       \   \        \   \       |   __|  |   __|  |   __|  |   __|  |  |         |  |
+                                            |  |  |  |  /  _____  \  .----)   |   .----)   |      |  |____ |  |     |  |     |  |____ |  `----.    |  |
+                                            |__|  |__| /__/     \__\ |_______/    |_______/       |_______||__|     |__|     |_______| \______|    |__|
 
 
 
-                              Your main mission is defeating the Space pirates boss, but first you have to collect elements necesarry to build your weapon.
-                              Elements are arranged around the maps. You will be travaling in your spaceship which will lose fuel so look out and collect
-                              fuel also! When you will have enough resources the weapon will apear in your inventory and the boss fight will be able!
-                                                                           Good luck and have fun !
+                          Your main mission is defeating the Space pirates boss stationed in Feniks system, but first you have to collect elements necesarry to build your weapon.
+                          Elements are arranged around the other systems. You will be travaling in your spaceship which will lose fuel so look out for this and collect
+                          fuel when necessary! When you will have enough resources the weapon will apear in your inventory and you will be able to travel into Feniks system to face the boss!
+                                                                       Good luck and have fun !
 
 
     ''')
@@ -82,6 +82,8 @@ def print_info():
                                                                                     + - Iridium
                                                                                     & - Palladium
                                                                                     % - Fuel
+                                                                                        Enemy:
+                                                                                    ! - Mines
                                                                            ----------------------------------
                                                                             TO COLLECT ELEMENTS MOVE ON THEM
                                                                                     X - quit the game

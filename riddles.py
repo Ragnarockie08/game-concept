@@ -10,13 +10,13 @@ def guess_digit():
     print(random_digit)
 
     print("Guess digit. From 0 into 10.")
-
+    tries = 1
     while True:
+        print("="* 40)
         if inventory['Armor'] < 1:
             print(lose)
             game_end()
             break
-        tries = 1
         print('Guess #', tries)
         guess_digit = input("Guess a digit: ")
         if guess_digit > random_digit:

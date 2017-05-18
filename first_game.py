@@ -2,11 +2,11 @@ import os
 from time import time, strftime
 from text import *
 from game_start import *
-from game_inventory import *
-from game_menu import *
-from hotncold import *
-from riddles import *
-from highscore import *
+from game_inventory import inventory, print_table
+from game_menu import print_menu
+from hotncold import hot_cold
+from riddles import guess_digit, test_milk_galaxy
+from highscore import add_highscore
 from color import *
 
 
@@ -25,7 +25,7 @@ def print_board(board):
     for row in board:
         for char in row:
             if char == '#':
-                    print(background.blue + colours.Blue + char + colours.Barier, end='')
+                print(background.blue + colours.Blue + char + colours.Barier, end='')
             elif char == '@':
                 print(colours.Blue + char, end='')
             elif char == '8':
@@ -75,9 +75,9 @@ def change_board(board_char):
     board = None
     if board_char == '8':
         board = create_board('boss_map.txt')
-    elif board_char == '9':
+    if board_char == '9':
         board = create_board('maze_board2.txt')
-    elif board_char == '7':
+    if board_char == '7':
         board = create_board('maze_board.txt')
     if board_char == '1':
         guess_digit()
@@ -133,6 +133,8 @@ def main():
             board[y][x] = ' '
             x = player_position[0]
             y = player_position[1]
+            if board_char == '!':
+                inventory['Armor'] -= 1
             if board_char in ['9', '7', '0', '1']:
                 board = change_board(board_char)
             if board_char == '8':
