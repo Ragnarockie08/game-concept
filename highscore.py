@@ -23,9 +23,15 @@ def write_highscore():
 
 
 def add_highscore(time):
-    username = input("Enter your username: ")
-    now = datetime.datetime.now()
 
+    while True:
+        username = input("Enter your username: ")
+        if len(username) > 10:
+            print("Wrong input")
+        else:
+            break
+
+    now = datetime.datetime.now()
     file_csv = open('highscore.csv', "a")
     file_csv.write(username + "|" + str(now) + "|" + str(time) + "|" +  str(inventory['Level']) +'\n')
     file_csv.close()
