@@ -38,7 +38,7 @@ def guess_digit():
 
 
 
-def test_milk_galaxy():
+def ask_quesion():
 
     question_list = ["Which one is Earth from the Sun in Solar System? ", "How many stars are in the Solar System?",
     "How many moons does Earth have? ", "How many moons does Mars have? "]
