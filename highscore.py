@@ -1,7 +1,7 @@
 import datetime
 import csv
 from first_game import time
-from text import highscore
+from text import highscore, title
 
 def show_highscore():
     with open('highscore.csv', encoding='utf-8-sig') as csvfile:
@@ -27,6 +27,7 @@ def show_highscore():
 
         sorted_desc = sorted(score, key=lambda x: x[2])
 
+        print(title)
         print(highscore)
         print("PLACE".rjust(60), "NAME".rjust(longest_name + 4), "DATE".rjust(14), "TIME".rjust(13))
         print(("-" * (longest_name + 60)).rjust(105))

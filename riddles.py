@@ -28,7 +28,6 @@ def guess_digit():
         tries += 1
 
 
-
 def test_milk_galaxy():
     question_list = ["aaa? ", "bbb? ", "ccc? ", "ddd? "]
     answer_list = ["1", "2", "3", "4"]

@@ -50,17 +50,17 @@ def print_board(board):
     print(print_table(inventory))
 
 
-def collect_elements(stage_item):
+def collect_elements(board_char):
 
     elements = ['%', '*', '+', '&']
 
-    if stage_item == elements[0]:
+    if board_char == elements[0]:
         inventory['fuel'] += 50
-    elif stage_item == elements[1]:
+    elif board_char == elements[1]:
         inventory['Platinum'] += 10
-    elif stage_item == elements[2]:
+    elif board_char == elements[2]:
         inventory['Iridium'] += 10
-    elif stage_item == elements[3]:
+    elif board_char == elements[3]:
         inventory['Palladium'] += 10
     suma = (inventory['Platinum'], inventory['Palladium'], inventory['Iridium'])
     if sum(suma) == 300:
@@ -148,6 +148,7 @@ def main():
 
     end_time = time.time()
     time_game = end_time - start_time
+    os.system('clear')
     add_highscore(time_game)
 
 
