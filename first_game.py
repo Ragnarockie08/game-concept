@@ -75,9 +75,9 @@ def collect_elements(board_char):
         inventory['Part1'] = 1
     elif board_char == elements[-2]:
         inventory['Part2'] = 1
-    suma = (inventory['Platinum'], inventory['Palladium'], inventory['Iridium'])
-    parts = (inventory['Part2'] + inventory['Part1'])
-    if sum(suma) >= 300 and parts == 2:
+    elements_sum = (inventory['Platinum'], inventory['Palladium'], inventory['Iridium'])
+    weapon_parts = (inventory['Part2'] + inventory['Part1'])
+    if sum(elements_sum) >= 300 and weapon_parts == 2:
         inventory['Weapons'] = 1
         inventory['Palladium'] = 0
         inventory['Platinum'] = 0
