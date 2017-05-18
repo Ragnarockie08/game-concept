@@ -2,7 +2,6 @@ import os
 import csv
 from game_start import *
 from game_menu import getch
-from spaceship import ship
 
 inventory = {'Platinum': 0, 'Palladium': 0, 'Iridium': 0, 'Weapons': 1, 'fuel': 300, 'Armor': 5}
 

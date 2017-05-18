@@ -34,12 +34,12 @@ def print_highscore(sorted_list, longest_name):
     count_highscore = 1
     print(title)
     print(highscore)
-    print("PLACE".rjust(80), "NAME".rjust(longest_name + 4), "DATE".rjust(14), "TIME".rjust(13))
-    print(("-" * (longest_name + 60)).rjust(130))
+    print(colours.Blue + "PLACE".rjust(80), colours.Yellow + "NAME".rjust(longest_name + 4),colours.Green + "DATE".rjust(14), colours.Red+"TIME".rjust(13) + colours.Barier)
+    print("-" * (longest_name + 60)).rjust(130)
     for item in sorted_list:
             print(str(count_highscore).rjust(80), "".join((item[0].rjust(longest_name + 4), item[1][:10].rjust(15), item[2][:4].rjust(10), " sec")))
             count_highscore += 1
-    print(("-" * (longest_name + 60)).rjust(130))
+    print("-" * (longest_name + 60)).rjust(130)
 
 
 def count_longest_name(score_list):

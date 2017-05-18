@@ -35,8 +35,9 @@ def guess_digit():
 
 
 def test_milk_galaxy():
-    question_list = ["aaa? ", "bbb? ", "ccc? ", "ddd? "]
-    answer_list = ["1", "2", "3", "4"]
+    question_list = ["Which one is Earth from the Sun in Solar System? ", "How many stars are in the Solar System?,
+    "How many moons does Earth have? ", "How many moons does Mars have? "]
+    answer_list = ["3", "1", "1", "2"]
 
     random_digit = range(0, 4)
     random_digit = random.choice(random_digit)
