@@ -29,12 +29,12 @@ def show_highscore():
 
         print(title)
         print(highscore)
-        print("PLACE".rjust(60), "NAME".rjust(longest_name + 4), "DATE".rjust(14), "TIME".rjust(13))
-        print(("-" * (longest_name + 60)).rjust(105))
+        print("PLACE".rjust(80), "NAME".rjust(longest_name + 4), "DATE".rjust(14), "TIME".rjust(13))
+        print(("-" * (longest_name + 60)).rjust(130))
         for item in sorted_desc:
-            print(str(count_highscore).rjust(60), "".join((item[0].rjust(longest_name + 4), item[1][:10].rjust(15), item[2][:4].rjust(10), " sec")))
+            print(str(count_highscore).rjust(80), "".join((item[0].rjust(longest_name + 4), item[1][:10].rjust(15), item[2][:4].rjust(10), " sec")))
             count_highscore += 1
-        print(("-" * (longest_name + 60)).rjust(105))
+        print(("-" * (longest_name + 60)).rjust(130))
 
 def add_highscore(time):
     username = input("Enter your username: ")
