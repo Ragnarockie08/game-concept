@@ -2,7 +2,7 @@ import os
 import time
 from text import *
 from game_start import *
-from game_inventory import inventory, print_table
+from game_inventory import Inventory, print_table
 from game_menu import print_menu, getch
 from hotncold import hot_cold
 from riddles import guess_digit, test_milk_galaxy
@@ -20,7 +20,7 @@ def create_board(filename='stage1.txt'):
     return board
 
 
-def print_board(board):
+def print_board(board, inventory):
 
     for row in board:
         for char in row:
@@ -54,10 +54,9 @@ def print_board(board):
     print(print_table(inventory))
 
 
-def collect_elements(board_char):
+def collect_elements(board_char, inventory):
 
     elements = ['%', '*', '+', '&', 'K', 'L']
-    keys = 0
 
     if board_char == elements[0]:
         inventory['fuel'] += 50
@@ -80,8 +79,7 @@ def collect_elements(board_char):
         inventory['Key'] = 0
 
 
-
-def change_board(board_char):
+def change_board(board_char, inventory):
 
     board = None
     if board_char == '8':
@@ -103,7 +101,7 @@ def change_board(board_char):
     return board
 
 
-def move_player(x, y):
+def move_player(x, y, inventory):
 
     pressed_key = getch().lower()
     current_x = x
@@ -125,9 +123,14 @@ def move_player(x, y):
 
     return [current_x, current_y]
 
+
 def main():
 
-    obstacles = ['#', '.', '/', '(', ')', '|', 'o', '=', '-', 'U', 'k','n', 'l', 'a', 'd', 'r', 'e', 'p', 'H', 'u', 's', 'F', 'i']
+    inventory = Inventory()
+    obstacles = [
+                '#', '.', '/', '(', ')', '|', 'o', '=', '-', 'U', 'k', 'n',
+                'l', 'a', 'd', 'r', 'e', 'p', 'H', 'u', 's', 'F', 'i'
+                ]
     lvl = 1
     print_menu()
     welcome_screen()
@@ -136,10 +139,10 @@ def main():
     board_copy = create_board('stage1.txt')
     x = 5
     y = 5
-    print_board(board)
+    print_board(board, inventory)
     while True:
 
-        player_position = move_player(x, y)
+        player_position = move_player(x, y, inventory)
         if inventory['fuel'] < 1:
             os.system('clear')
             print(lose)
@@ -153,23 +156,23 @@ def main():
             if board_char == '!':
                 inventory['Armor'] -= 1
             if board_char in ['0', '1']:
-                board = change_board(board_char)
+                board = change_board(board_char, inventory)
             elif board_char == '9':
                 if inventory['Level'] == 1 or 2:
-                    board = change_board(board_char)
+                    board = change_board(board_char, inventory)
             elif board_char == '7':
                 if inventory['Level'] == 2 or 3:
-                    board = change_board(board_char)
+                    board = change_board(board_char, inventory)
             elif board_char == '8':
                 if inventory['Weapons'] == 1:
-                    board = change_board(board_char)
+                    board = change_board(board_char, inventory)
             elif board_char == 'P':
                 os.system('clear')
                 hot_cold()
                 break
-        collect_elements(board_char)
+        collect_elements(board_char, inventory)
         os.system('clear')
-        print_board(board)
+        print_board(board, inventory)
 
     end_time = time.time()
     time_game = end_time - start_time

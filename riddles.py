@@ -1,10 +1,12 @@
 import random
-from game_inventory import inventory
+from game_inventory import Inventory
 import time
 from text import lose
 from game_start import game_end
 
 def guess_digit():
+
+    inventory = Inventory()
     random_digit = range(0, 10)
     random_digit = str(random.choice(random_digit))
     print(random_digit)
@@ -38,6 +40,7 @@ def guess_digit():
 
 
 def test_milk_galaxy():
+    inventory = Inventory()
     question_list = ["Which one is Earth from the Sun in Solar System? ", "How many stars are in the Solar System?",
     "How many moons does Earth have? ", "How many moons does Mars have? "]
     answer_list = ["3", "1", "1", "2"]

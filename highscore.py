@@ -3,7 +3,7 @@ import csv
 from first_game import time
 from text import highscore, title
 from color import *
-from game_inventory import inventory
+from game_inventory import Inventory
 
 
 def write_highscore():
@@ -24,6 +24,7 @@ def write_highscore():
 
 def add_highscore(time):
 
+    inventory = Inventory()
     while True:
         username = input("Enter your username: ")
         if len(username) > 10:

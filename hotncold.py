@@ -2,7 +2,7 @@ import random
 import os
 import sys
 import time
-from game_inventory import inventory
+from game_inventory import Inventory
 from text import lose, win, boss_fight
 
 
@@ -15,6 +15,7 @@ def hot_cold():
 
 
 def print_rules():
+    inventory = Inventory()
     tries = 1
     while True:
         print('I am thinking of a 3-digit number. Try to guess what it is.\n\
