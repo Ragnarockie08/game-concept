@@ -1,13 +1,8 @@
-from speceship import *
 import os
 from text import *
 import time
 import sys
-import csv
 from game_inventory import choose_spaceship, skip
-from first_game import getch
-from first_game import *
-#from highscore import *
 
 
 def welcome_screen():
@@ -21,9 +16,8 @@ def welcome_screen():
 
 def game_end():
 
+    time.sleep(1)
     os.system('clear')
     print(end)
-    print("Thanks for playing and see you next time")
-
     time.sleep(2)
     sys.exit()

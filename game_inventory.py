@@ -2,6 +2,7 @@ import os
 import csv
 from game_start import *
 from game_menu import getch
+from spaceship import ship
 
 inventory = {'Platinum': 0, 'Palladium': 0, 'Iridium': 0, 'Weapons': 1, 'fuel': 300, 'Armor': 5}
 
@@ -89,4 +90,3 @@ def print_table(inventory, order='count,desc'):
             else:
                 print(inventory[key], key.rjust(14+(longest_word)))
         print("----------------{}".format("-" * longest_word))
-        print("Total number of items: {}\n".format(sum(inventory.values())))

@@ -1,6 +1,8 @@
 import random
 from game_inventory import inventory
 import time
+from text import lose
+from game_start import game_end
 
 def guess_digit():
     random_digit = range(0, 10)
@@ -12,20 +14,24 @@ def guess_digit():
     while True:
         if inventory['Armor'] < 1:
             print(lose)
+            game_end()
+            break
         tries = 1
         print('Guess #', tries)
         guess_digit = input("Guess a digit: ")
         if guess_digit > random_digit:
             print("Too much")
             inventory['Armor'] -= 1
+            tries += 1
             continue
         elif guess_digit < random_digit:
             print("Too little")
             inventory['Armor'] -= 1
+            tries += 1
             continue
         else:
             break
-        tries += 1
+
 
 
 def test_milk_galaxy():
