@@ -138,6 +138,7 @@ def main():
     y = 5
     print_board(board)
     while True:
+
         player_position = move_player(x, y)
         if inventory['fuel'] < 1:
             os.system('clear')
