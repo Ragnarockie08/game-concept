@@ -37,7 +37,7 @@ def guess_digit():
             break
 
 
-def ask_quesion():
+def ask_question():
 
     question_list = ["Which one is Earth from the Sun in Solar System? ", "How many stars are in the Solar System?",
     "How many moons does Earth have? ", "How many moons does Mars have? "]
