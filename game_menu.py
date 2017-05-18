@@ -2,6 +2,8 @@ import os
 import sys
 from text import welcom
 from read_key import getch
+
+
 def print_menu():
     while True:
         os.system('clear')
