@@ -33,6 +33,10 @@ def print_board(board):
                 print(background.cyan + colours.Yellow + char + colours.Barier, end='')
             elif char == '9':
                 print(background.cyan + colours.Yellow + char + colours.Barier, end='')
+            elif char == '1':
+                print(background.cyan + colours.Yellow + char + colours.Barier, end='')
+            elif char == '0':
+                print(background.cyan + colours.Yellow + char + colours.Barier, end='')
             elif char == '7':
                 print(background.cyan + colours.Yellow + char + colours.Barier, end='')
             elif char == '*':
