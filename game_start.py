@@ -2,11 +2,11 @@ import os
 from text import *
 import time
 import sys
-from game_inventory import skip, Inventory
+from game_inventory import skip, inventory
 
 
 def choose_spaceship():
-    inventory = Inventory()
+
     spaceships = {"NORMANDIA": "NORMANDIA HAVE HUGE TANK",
                   "PROTECTOR": "PROTECTOR HAVE UNBROKEN ARMOR"
                   }
@@ -38,7 +38,7 @@ def choose_spaceship():
                 inventory['Armor'] = 7
                 break
             elif ship_take == "2":
-                inventory['fuel'] = 400
+                inventory['fuel'] = 500
                 inventory['Armor'] = 10
                 break
         else:

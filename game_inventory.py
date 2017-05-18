@@ -2,9 +2,8 @@ import os
 from game_start import *
 from read_key import getch
 
-def Inventory():
-    inventory = {'Platinum': 0, 'Palladium': 0, 'Iridium': 0, 'Weapons': 1, 'fuel': 300, 'Armor': 5, 'Level': 1, 'Key': 0}
-    return inventory
+inventory = {'Platinum': 0, 'Palladium': 0, 'Iridium': 0, 'Weapons': 1, 'fuel': 0, 'Armor': 0, 'Level': 1, 'Key': 0}
+
 
 def skip():
     print("press S to move further or Q to quit")

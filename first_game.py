@@ -2,7 +2,7 @@ import os
 import time
 from text import *
 from game_start import *
-from game_inventory import Inventory, print_table
+from game_inventory import inventory, print_table
 from game_menu import print_menu
 from read_key import getch
 from hotncold import hot_cold
@@ -21,7 +21,7 @@ def create_board(filename='stage1.txt'):
     return board
 
 
-def print_board(board, inventory):
+def print_board(board):
 
     for row in board:
         for char in row:
@@ -55,7 +55,7 @@ def print_board(board, inventory):
     print(print_table(inventory))
 
 
-def collect_elements(board_char, inventory):
+def collect_elements(board_char):
 
     elements = ['%', '*', '+', '&', 'K', 'L']
 
@@ -68,9 +68,9 @@ def collect_elements(board_char, inventory):
     elif board_char == elements[3]:
         inventory['Palladium'] += 10
     elif board_char == elements[-1]:
-        inventory['Key'] += 1
+        inventory['Key'] = 1
     elif board_char == elements[-2]:
-        inventory['Key'] += 1
+        inventory['Key'] = 2
     suma = (inventory['Platinum'], inventory['Palladium'], inventory['Iridium'])
     if sum(suma) == 300 and inventory['Key'] == 2:
         inventory['Weapons'] = 1
@@ -80,7 +80,7 @@ def collect_elements(board_char, inventory):
         inventory['Key'] = 0
 
 
-def change_board(board_char, inventory):
+def change_board(board_char):
 
     board = None
     if board_char == '8':
@@ -102,7 +102,7 @@ def change_board(board_char, inventory):
     return board
 
 
-def move_player(x, y, inventory):
+def move_player(x, y):
 
     pressed_key = getch().lower()
     current_x = x
@@ -127,12 +127,11 @@ def move_player(x, y, inventory):
 
 def main():
 
-    inventory = Inventory()
+
     obstacles = [
                 '#', '.', '/', '(', ')', '|', 'o', '=', '-', 'U', 'k', 'n',
                 'l', 'a', 'd', 'r', 'e', 'p', 'H', 'u', 's', 'F', 'i'
                 ]
-    lvl = 1
     print_menu()
     welcome_screen()
     start_time = time.time()
@@ -140,10 +139,10 @@ def main():
     board_copy = create_board('stage1.txt')
     x = 5
     y = 5
-    print_board(board, inventory)
+    print_board(board)
     while True:
 
-        player_position = move_player(x, y, inventory)
+        player_position = move_player(x, y)
         if inventory['fuel'] < 1:
             os.system('clear')
             print(lose)
@@ -157,23 +156,21 @@ def main():
             if board_char == '!':
                 inventory['Armor'] -= 1
             if board_char in ['0', '1']:
-                board = change_board(board_char, inventory)
+                board = change_board(board_char)
             elif board_char == '9':
-                if inventory['Level'] == 1 or 2:
-                    board = change_board(board_char, inventory)
+                    board = change_board(board_char)
             elif board_char == '7':
-                if inventory['Level'] == 2 or 3:
-                    board = change_board(board_char, inventory)
+                    board = change_board(board_char)
             elif board_char == '8':
                 if inventory['Weapons'] == 1:
-                    board = change_board(board_char, inventory)
+                    board = change_board(board_char)
             elif board_char == 'P':
                 os.system('clear')
                 hot_cold()
                 break
-        collect_elements(board_char, inventory)
+        collect_elements(board_char)
         os.system('clear')
-        print_board(board, inventory)
+        print_board(board)
 
     end_time = time.time()
     time_game = end_time - start_time
