@@ -41,14 +41,17 @@ def add_highscore(time):
 
 
 def print_highscore(sorted_list, longest_name):
-    count_highscore = 1
+    count_highscore = 0
     print(title)
     print(highscore)
     print(colours.Blue + "PLACE".rjust(80), colours.Yellow + "NAME".rjust(longest_name + 4),colours.Green + "DATE".rjust(14), colours.Blue +"LEVEL".rjust(9), colours.Red+"TIME".rjust(13) + colours.Barier)
     print(("-" * (longest_name + 50)).rjust(130))
     for item in sorted_list:
-            print(str(count_highscore).rjust(80), "".join((item[0].rjust(longest_name + 4), item[1][:10].rjust(15), item[3].rjust(10), item[2][:4].rjust(10), " sec")))
-            count_highscore += 1
+        count_highscore += 1
+        print(str(count_highscore).rjust(80), "".join((item[0].rjust(longest_name + 4), item[1][:10].rjust(15), item[3].rjust(10), item[2][:4].rjust(10), " sec")))
+        if count_highscore == 10:
+            break
+
     print(("-" * (longest_name + 50)).rjust(130))
 
 
