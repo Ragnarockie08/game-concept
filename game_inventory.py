@@ -17,7 +17,8 @@ def choose_spaceship():
         print("="* 30)
 
         try:
-            options = int(input("1: Hints about ships \n2: Choose your ship"))
+            print("1: Hints about ships \n2: Choose your ship")
+            options = int(input("Choose: "))
         except ValueError:
             os.system('clear')
             continue
@@ -55,7 +56,6 @@ def skip():
     skip = getch().lower()
     os.system('clear')
     if skip == "q":
-        x = "exit"
         game_end()
 
 
