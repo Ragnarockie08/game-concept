@@ -5,81 +5,96 @@ import time
 from game_inventory import inventory
 from text import lose, win, boss_fight
 
+def game_hot_cold():
+    print_instruction()
+    random_digit = draw_digits()
+    print(random_digit)
+
+    random_digit_list = list(random_digit)
+    tries = 1
+
+    while True:
+        count_hot = 0
+        count_warm = 0
+        count_cold = 0
+        print('Guess #', tries)
+
+        digit_input = guess_digit()
+        digit_input_list = check_digis(digit_input, random_digit_list)
+
+        tries += 1
+
+        if tries == 10:
+            time.sleep(2)
+            os.system('clear')
+            print(lose)
+            time.sleep(2)
+            break
+
+        if digit_input_list == random_digit_list:
+            os.system('clear')
+            print(win)
+            break
 
 
-def hot_cold():
-    print(boss_fight)
+
+def print_instruction():
+    print('I am thinking of a 3-digit number. Try to guess what it is.\n\
+          Here are some clues:\n\
+          When I say:    That means:\n\
+          Cold       No digit is correct.\n\
+          Warm       One digit is correct but in the wrong position.\n\
+          Hot        One digit is correct and in the right position.\n\
+          I have thought up a number. You have 10 guesses to get it.')
+
+
+def draw_digits():
     random_digit = range(100, 1000)
     random_digit = str(random.choice(random_digit))
-    print_rules()
+    return random_digit
 
 
-def print_rules():
-
-    tries = 1
+def guess_digit():
+    digit_input = 0
     while True:
-        print('I am thinking of a 3-digit number. Try to guess what it is.\n\
-              Here are some clues:\n\
-              When I say:    That means:\n\
-              Cold       No digit is correct.\n\
-              Warm       One digit is correct but in the wrong position.\n\
-              Hot        One digit is correct and in the right position.\n\
-              I have thought up a number. You have {} guesses to get it.'.format(inventory['Armor']))
+        try:
+            digit_input = int(input("Guess digit: "))
+        except ValueError:
+            print("Try again. Enter 3 digits.")
+            continue
 
-        random_digit = range(100, 1000)
-        random_digit = str(random.choice(random_digit))
-        print(random_digit)
-
-        tries = 1
-        digit_input = input("Guess digit: ")
-        while inventory['Armor'] > 0:
-            print('Guess #', tries)
-            if tries == 1:
-                pass
-            else:
-                digit_input = input("Guess digit: ")
-
-            list_random = [random_digit[0], random_digit[1], random_digit[2]]
-            list_input = [digit_input[0], digit_input[1], digit_input[2]]
-            index_of_hot = []
-            count_hot = 0
-            count_warm = 0
-            count_cold = 0
-
-            for i in range(len(list_input)):
-                if list_input[i] == list_random[i]:
-                    count_hot += 1
-                    index_of_hot.append(i)
-
-            list_to_check_warm = [0, 1, 2]
-            for i in range(len(index_of_hot)):
-                list_to_check_warm.remove(index_of_hot[i])
-
-            for i in list_to_check_warm:
-                if list_input[i] in list_random:
-                    count_warm += 1
-                else:
-                    count_cold += 1
-            if count_cold == 3:
-                print("Cold")
-                inventory['Armor'] -= 1
-                print("Armor: ", inventory['Armor'])
-            else:
-                print("Hot " * count_hot, " Warm" * count_warm)
-                inventory['Armor'] -= 1
-                print("Armor: ", inventory['Armor'])
+        if len(str(digit_input)) != 3:
+            print("Try again. Enter 3 digits.")
+            continue
+        else:
+            break
+    return str(digit_input)
 
 
-            tries += 1
+def check_digis(digit_input, random_digit_list):
+    count_hot = 0
+    count_warm = 0
+    count_cold = 0
 
-            if digit_input == random_digit:
-                os.system('clear')
-                print(win)
-                print('''                                                                                  Armor left: {}'''.format(inventory['Armor']))
-                break
-            elif inventory['Armor'] < 1:
-                time.sleep(2)
-                os.system('clear')
-                print(lose)
-                time.sleep(2)
-        break
+    digit_input_list = list(digit_input)
+    index_of_hot = []
+    for item in range(len(digit_input_list)):
+        if digit_input_list[item] == random_digit_list[item]:
+            count_hot += 1
+            index_of_hot.append(item)
+
+    list_to_check_warm = [0, 1, 2]
+    for i in range(len(index_of_hot)):
+        list_to_check_warm.remove(index_of_hot[i])
+
+    for i in list_to_check_warm:
+        if digit_input_list[i] in random_digit_list:
+            count_warm += 1
+        else:
+            count_cold += 1
+    if count_cold == 3:
+        print("Cold")
+    else:
+        print("Hot " * count_hot, " Warm " * count_warm)
+
+    return digit_input_list

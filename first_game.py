@@ -5,8 +5,8 @@ from game_start import *
 from game_inventory import inventory, print_table
 from game_menu import print_menu
 from read_key import getch
-from hotncold import hot_cold
-from riddles import guess_digit, test_milk_galaxy
+from hotncold import game_hot_cold
+from riddles import guess_digit, ask_quesion
 from highscore import *
 from color import *
 
@@ -102,7 +102,7 @@ def change_board(board_char):
         guess_digit()
         board = create_board('stage1.txt')
     if board_char == '0':
-        test_milk_galaxy()
+        ask_quesion()
         board = create_board('stage1.txt')
 
     return board
@@ -172,7 +172,7 @@ def main():
                     board = change_board(board_char)
             elif board_char == 'P':
                 os.system('clear')
-                hot_cold()
+                game_hot_cold()
                 break
         collect_elements(board_char)
         os.system('clear')
