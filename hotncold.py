@@ -24,7 +24,7 @@ def game_hot_cold():
 
         tries += 1
 
-        if inventory['Armor'] == 0:
+        if inventory['Armor'] == -1:
             os.system('clear')
             print(lose)
             time.sleep(2)
