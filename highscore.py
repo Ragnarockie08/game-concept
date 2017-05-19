@@ -38,7 +38,7 @@ def add_highscore(time):
     file_csv.write(username + "|" + str(now) + "|" + str(time) + "|" +  str(inventory['Level']) +'\n')
     file_csv.close()
 
-    write_highscore()
+    read_highscore_from_file()
 
 
 

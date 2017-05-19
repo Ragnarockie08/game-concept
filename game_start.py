@@ -35,11 +35,11 @@ def choose_spaceship():
             ship_take = input("Choose your spaceship: (press 1 or 2): ").upper()
             if ship_take == "1":
                 inventory['fuel'] = 700
-                inventory['Armor'] = 7
+                inventory['Armor'] = 10
                 break
             elif ship_take == "2":
                 inventory['fuel'] = 500
-                inventory['Armor'] = 10
+                inventory['Armor'] = 13
                 break
         else:
             os.system('clear')

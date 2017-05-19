@@ -9,7 +9,6 @@ def game_hot_cold():
     '''Main function game game Hot and Cold. Here calls all function needed to game'''
     print_instruction()
     random_digit = draw_digits()
-    print(random_digit)
 
     random_digit_list = list(random_digit)
     tries = 1
