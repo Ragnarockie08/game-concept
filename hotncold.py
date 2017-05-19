@@ -6,6 +6,7 @@ from game_inventory import inventory
 from text import lose, win, boss_fight
 
 def game_hot_cold():
+    '''Main function game game Hot and Cold. Here calls all function needed to game'''
     print_instruction()
     random_digit = draw_digits()
     print(random_digit)
@@ -38,6 +39,7 @@ def game_hot_cold():
 
 
 def print_instruction():
+    '''Prints instructions on screen'''
     print('I am thinking of a 3-digit number. Try to guess what it is.\n\
           Here are some clues:\n\
           When I say:    That means:\n\
@@ -48,12 +50,14 @@ def print_instruction():
 
 
 def draw_digits():
+    '''This funnctions draws digits from a range of 100 to 999'''
     random_digit = range(100, 1000)
     random_digit = str(random.choice(random_digit))
     return random_digit
 
 
 def guess_digit():
+    '''Functions gets digits from user'''
     digit_input = 0
     while True:
         try:
@@ -71,6 +75,8 @@ def guess_digit():
 
 
 def check_digis(digit_input, random_digit_list):
+    '''Main logic part game - Hot and Cold. This function checks user digit, and print appropriate word(cold,warm,hot)'''
+
     count_hot = 0
     count_warm = 0
     count_cold = 0

@@ -10,7 +10,7 @@ def guess_digit():
     random_digit = str(random.choice(random_digit))
     print(random_digit)
 
-    print("Guess digit. From 0 into 10.")
+    print("Guess digit. From 0 to 10.")
     tries = 1
     while True:
         print("="* 40)

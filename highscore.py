@@ -5,7 +5,9 @@ from color import *
 from game_inventory import inventory
 
 
-def write_highscore():
+def read_highscore_from_file():
+    '''This function highscore reads from file, convert and calls function which prints highscore on screen'''
+
     with open('highscore.csv', encoding='utf-8-sig') as csvfile:
         reader = csvfile.readlines()
         score_list = []
@@ -15,13 +17,14 @@ def write_highscore():
         for row in spilit_score:
             score_list.append((row[0], row[1], row[2], row[3].replace("\n", "")))
 
-        sorted_list = sorted(score_list, key=lambda x: int(x[3]), reverse = True)
-        sorted_list = sorted(sorted_list, key=lambda x: float(x[2]))
+        sorted_list = sorted(score_list, key=lambda x: int(x[3]), reverse = True) #sorted by level
+        sorted_list = sorted(sorted_list, key=lambda x: float(x[2])) #sorted by time
         longest_name = count_longest_name(score_list)
         print_highscore(sorted_list, longest_name)
 
 
 def add_highscore(time):
+    '''This functions adds new scores to csv file'''
 
     while True:
         username = input("Enter your username: ")
@@ -40,6 +43,7 @@ def add_highscore(time):
 
 
 def print_highscore(sorted_list, longest_name):
+    '''This function prints highscore by sorted list.'''
     count_highscore = 0
     print(title)
     print(highscore)
@@ -55,6 +59,7 @@ def print_highscore(sorted_list, longest_name):
 
 
 def count_longest_name(score_list):
+    '''This function counts the longest user name which is needed to modify table in highscore'''
     count = 0
     longest_name = 0
     for item in score_list:
