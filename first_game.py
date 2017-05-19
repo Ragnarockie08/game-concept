@@ -102,7 +102,7 @@ def change_board(board_char):
         guess_digit()
         board = create_board('stage1.txt')
     if board_char == '0':
-        ask_quesion()
+        ask_question()
         board = create_board('stage1.txt')
 
     return board
